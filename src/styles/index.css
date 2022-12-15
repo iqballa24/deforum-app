@@ -25,16 +25,18 @@ header {
 }
 
 body {
+  font-size: 14px;
   font-family: 'Poppins', sans-serif;
   background-color: var(--background-color);
   color: var(--font-color);
-  overflow: hidden;
 }
 
 #root {
+  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .container {

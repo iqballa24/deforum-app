@@ -12,7 +12,7 @@ module.exports = {
         base: '16px',
       },
       screens: {
-        sm: '375px',
+        sm: '385px',
         md: '768px',
         lg: '976px',
         xl: '1440px',
@@ -41,5 +41,5 @@ module.exports = {
     },
   },
   plugins: [],
-  darkMode: ["class"],
+  darkMode: ['class'],
 };
