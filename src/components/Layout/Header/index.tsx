@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Container } from '../../UI';
+import { Container, ProfileAvatar } from '../../UI';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);

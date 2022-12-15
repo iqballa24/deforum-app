@@ -10,3 +10,18 @@ export interface ButtonsProps {
   center?: boolean;
   end?: boolean;
 }
+
+export interface ItemTopUserProps {
+  name: string;
+  score: number;
+}
+
+export interface leaderBoardsItem {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    avatar: string;
+  };
+  score: number;
+}
