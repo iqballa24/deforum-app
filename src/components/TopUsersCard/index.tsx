@@ -21,7 +21,7 @@ const TopUsersCard = () => {
   return (
     <WrapperCard>
       <div className="flex flex-row justify-between">
-        <h1 className="font-bold mb-5">Top Users</h1>
+        <h1 className="font-bold mb-5 text-sm">Top Users</h1>
         <Link to="leaderboards" className="underline text-blue-700">
           See all
         </Link>
@@ -32,6 +32,7 @@ const TopUsersCard = () => {
             key={item.user.id}
             name={item.user.name}
             score={item.score}
+            fontSize='sm'
           />
         ))}
       </ul>

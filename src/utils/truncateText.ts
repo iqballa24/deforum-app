@@ -1,3 +1,4 @@
 export default function truncateText(string: string, max: number) {
-  return string.length > max ? string.slice(0, max - 1) + '...' : string;
+  const truncate = string;
+  return truncate.length > max ? truncate.slice(0, max - 1) + '...' : truncate;
 }

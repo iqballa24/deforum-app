@@ -7,12 +7,12 @@ import { Container } from '../UI';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <>
+    <React.Fragment>
       <Header />
       <main className="py-8 h-full">
         <Container>
           <section
-            className="hidden sm:flex flex-col sm:w-2/12 md:w-3/12 h-full lg:pr-5"
+            className="hidden sm:flex flex-col sm:w-2/12 md:w-3/12 h-full max-w-[230px]"
             role="navigation"
             aria-label="Primary"
           >
@@ -39,7 +39,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </section>
         </Container>
       </main>
-    </>
+    </React.Fragment>
   );
 };
 

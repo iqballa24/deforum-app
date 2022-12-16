@@ -1,3 +1,6 @@
+import React from 'react';
+import { IconType } from 'react-icons/lib';
+
 export interface ButtonsProps {
   children: React.ReactNode;
   type: 'button' | 'submit' | 'reset';
@@ -14,6 +17,7 @@ export interface ButtonsProps {
 export interface ItemTopUserProps {
   name: string;
   score: number;
+  fontSize: string;
 }
 
 export interface leaderBoardsItem {
@@ -24,4 +28,23 @@ export interface leaderBoardsItem {
     avatar: string;
   };
   score: number;
+}
+
+export interface SearchBarProps {
+  value: string;
+  onSearchHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface InputProps {
+  placeholder: string;
+  type: string;
+}
+
+export interface ButtonSwitchProps {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isChecked: boolean;
+  icon: {
+    iconLeft: IconType;
+    iconRight: IconType;
+  };
 }
