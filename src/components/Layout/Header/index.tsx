@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Container, ProfileAvatar } from '../../UI';
+import { Container } from '../../UI';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
@@ -10,7 +10,7 @@ const Header = () => {
       <Container>
         <div className="flex-1 flex flex-row items-center md:space-x-3">
           <img
-            src="LOGO.svg"
+            src="/LOGO.svg"
             alt="logo deforum"
             className="max-w-[58px] hidden md:block"
           />
