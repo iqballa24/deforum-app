@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Container, ProfileAvatar } from '../../UI';
+import { Container, AvatarImage } from '../../UI';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
@@ -10,7 +10,7 @@ const Header = () => {
       <Container>
         <div className="flex-1 flex flex-row items-center md:space-x-3">
           <img
-            src="LOGO.svg"
+            src="/LOGO.svg"
             alt="logo deforum"
             className="max-w-[58px] hidden md:block"
           />
@@ -20,12 +20,7 @@ const Header = () => {
         </div>
         {isLoggedIn ? (
           <div className="flex-1 flex flex-row items-center justify-end space-x-3">
-            <img
-              src={`https://ui-avatars.com/api/?name=Iqbal+Nugraha&background=FF9315&color=fff`}
-              alt="avatar"
-              width="100%"
-              className="rounded-full w-[44px]"
-            />
+            <AvatarImage name='Iqbal Nugraha' size={44}/>
             <div className="hidden md:flex flex-col space-y-1">
               <p className="text-xs font-bold text-primary">Iqbal Nugraha</p>
               <p className="text-xs font-light text-grey-dark dark:text-white">

@@ -32,7 +32,7 @@ module.exports = {
           DEFAULT: '#EF5950',
         },
         green: {
-          DEFAULT: '7ACB9A',
+          DEFAULT: '#7ACB9A',
         },
         orange: {
           light: '#FFF3E4',

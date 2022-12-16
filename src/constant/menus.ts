@@ -10,7 +10,7 @@ const menus = [
     id: 1,
     name: { en: 'Home', id: 'Beranda' },
     icon: AiOutlineHome,
-    path: '/',
+    path: '/threads',
     active: true,
   },
   {

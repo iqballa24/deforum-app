@@ -18,8 +18,8 @@ const PopularCard = () => {
 
   return (
     <WrapperCard>
-      <h1 className="font-bold mb-5">Popular Category</h1>
-      <ul className="flex flex-col space-y-3 overflow-hidden">
+      <h1 className="font-bold mb-5 text-sm">Popular Category</h1>
+      <ul className="flex flex-col space-y-3 overflow-hidden text-sm">
         {categories.map((item, index) => (
           <li
             key={index}

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Button } from '../../UI';
+import Settings from '../../Settings';
+import FormAddThreads from '../../Form/FormAddThread';
+import { Button, Modal } from '../../UI';
 import {
   AiOutlineLogout,
   AiOutlineSetting,
@@ -9,12 +11,23 @@ import {
 import menus from '../../../constant/menus';
 
 const Sidebar = () => {
+  const [showModalAddThread, setShowModalAddThread] = useState<boolean>(false);
+  const [showModalSettings, setShowModalSettings] = useState(false);
+
+  const toggleModalAddThread = () => {
+    setShowModalAddThread((prev) => !prev);
+  };
+
+  const toggleModalSettings = () => {
+    setShowModalSettings((prev) => !prev);
+  };
+
   const classNavLink =
     'flex flex-row items-center px-5 py-3 cursor-pointer space-x-5 whitespace-nowrap rounded hover:text-primary transition-all justify-center md:justify-start';
   const active = 'bg-orange-light text-primary border-l-2 border-primary';
 
   return (
-    <>
+    <React.Fragment>
       <ul className="flex flex-col space-y-4 h-full">
         <li className="md:px-5 pb-3 font-bold text-center md:text-left">
           Menu
@@ -35,7 +48,7 @@ const Sidebar = () => {
         <li>
           <Button
             type="button"
-            onClick={() => console.log('new thread')}
+            onClick={toggleModalAddThread}
             isPrimary
             isFull
             title="New Thread"
@@ -47,8 +60,9 @@ const Sidebar = () => {
       </ul>
       <ul className="flex flex-col space-y-4">
         <li
-          className="flex flex-row items-center justify-center md:justify-start px-5 py-3 cursor-pointer rounded hover:text-primary"
           title="Settings"
+          className="flex flex-row items-center justify-center md:justify-start px-5 py-3 cursor-pointer rounded hover:text-primary"
+          onClick={toggleModalSettings}
         >
           <AiOutlineSetting size={20} />
           <span className="hidden md:block md:pl-5">Settings</span>
@@ -67,7 +81,19 @@ const Sidebar = () => {
           </Button>
         </li>
       </ul>
-    </>
+      {showModalAddThread && (
+        <Modal
+          contentModal={<FormAddThreads onClose={toggleModalAddThread} />}
+          onClose={toggleModalAddThread}
+        />
+      )}
+      {showModalSettings && (
+        <Modal
+          contentModal={<Settings onClose={toggleModalSettings} />}
+          onClose={toggleModalSettings}
+        />
+      )}
+    </React.Fragment>
   );
 };
 
