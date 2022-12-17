@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Settings from '../../Settings';
-import FormAddThreads from '../../Form/FormAddThread';
-import { Button, Modal } from '../../UI';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   AiOutlineLogout,
   AiOutlineSetting,
   AiOutlinePlus,
 } from 'react-icons/ai';
-import menus from '../../../constant/menus';
+
+import Settings from '@/components/Settings';
+import FormAddThreads from '@/components/Form/FormAddThread';
+import { Button, Modal } from '@/components/UI';
+import menus from '@/constant/menus';
+import { RootState } from 'lib/types/rootState';
+import { uiActions } from '@/store/uiSlice';
 
 const Sidebar = () => {
-  const [showModalAddThread, setShowModalAddThread] = useState<boolean>(false);
-  const [showModalSettings, setShowModalSettings] = useState(false);
+  const dispatch = useDispatch();
+  const { showModalAddThread, showModalSettings } = useSelector(
+    (state: RootState) => state.ui
+  );
 
   const toggleModalAddThread = () => {
-    setShowModalAddThread((prev) => !prev);
+    dispatch(uiActions.toggleModalAddThread());
   };
 
   const toggleModalSettings = () => {
-    setShowModalSettings((prev) => !prev);
+    dispatch(uiActions.toggleModalSettings());
   };
 
   const classNavLink =

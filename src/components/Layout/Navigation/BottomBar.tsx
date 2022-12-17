@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import menus from '../../../constant/menus';
+import menus from '@/constant/menus';
 
 const BottomBar = () => {
   const classNavLink =

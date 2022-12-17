@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import WrapperCard from '../UI/WrapperCard';
+import { WrapperCard } from '@/components/UI';
 
 const PopularCard = () => {
   const [selectedCategory, setSelectedCategory] = useState('');

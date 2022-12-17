@@ -2,9 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BsSquareFill } from 'react-icons/bs';
-import classes from '../../../styles/Spinner.module.css';
+import classes from '@/styles/Spinner.module.css';
 
-const portalElement = document.getElementById('overlays')!;
+const portalElement = document.getElementById('overlays') as HTMLElement;
 
 const Spinner = () => {
   return (

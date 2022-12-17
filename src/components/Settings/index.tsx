@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactEventHandler } from 'react';
 import { motion } from 'framer-motion';
-import { ButtonSwitch } from '../UI';
-import { dropIn } from '../../constant/transition';
+import { ButtonSwitch } from '@/components/UI';
+import { dropIn } from '@/constant/transition';
 
 import {
   MdOutlineLightMode,

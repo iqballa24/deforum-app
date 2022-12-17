@@ -1,7 +1,7 @@
 import React from 'react';
-import AvatarImage from '../AvatarImage';
 import { AiFillFire } from 'react-icons/ai';
 import { ItemTopUserProps } from 'lib/types';
+import { AvatarImage } from '@/components/UI';
 
 const ItemTopUser: React.FC<ItemTopUserProps> = ({ name, score, fontSize }) => {
   return (

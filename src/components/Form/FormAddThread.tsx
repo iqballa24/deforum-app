@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Input, Button } from '../UI';
-import { dropIn } from '../../constant/transition';
 import { AiOutlineClose } from 'react-icons/ai';
+import { Input, Button } from '@/components/UI';
+import { dropIn } from '@/constant/transition';
 
 const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const onInputContentBody = () => {

@@ -1,9 +1,10 @@
 import React from 'react';
 import Header from './Header';
 import { Sidebar, BottomBar } from './Navigation/';
-import PopularCard from '../PopularCard';
-import TopUsersCard from '../TopUsersCard';
-import { Container } from '../UI';
+
+import PopularCard from '@/components/PopularCard';
+import TopUsersCard from '@/components/TopUsersCard';
+import { Container } from '@/components/UI';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (

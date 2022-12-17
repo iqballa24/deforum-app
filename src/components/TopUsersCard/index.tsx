@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { leaderBoardsItem } from 'lib/types';
 
-import { WrapperCard, ItemTopUser } from '../UI/';
-import leaderboards from '../../constant/leaderboards';
-import { sortUserByScore } from '../../utils';
+import { WrapperCard, ItemTopUser } from '@/components/UI';
+import leaderboards from '@/constant/leaderboards';
+import { sortUserByScore } from '@/utils';
 
 const TopUsersCard = () => {
   const [sliceUsers, setSliceUsers] = useState<leaderBoardsItem[]>([]);
