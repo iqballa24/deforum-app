@@ -1,6 +1,6 @@
 import React from 'react';
 import { ButtonSwitchProps } from 'lib/types';
-import classes from '../../../styles/Switch.module.css';
+import classes from '@/styles/Switch.module.css';
 
 const ButtonSwitch: React.FC<ButtonSwitchProps> = ({
   onChange,

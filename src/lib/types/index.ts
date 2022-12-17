@@ -1,6 +1,25 @@
 import React from 'react';
 import { IconType } from 'react-icons/lib';
 
+/*
+  TYPES STORE
+*/
+
+export type uiState = {
+  showModalSettings: boolean;
+  showModalAddThread: boolean;
+  isDarkMode: boolean;
+  language: string;
+};
+
+export interface RootState {
+  ui: uiState;
+}
+
+/*
+  PROPS TYPES
+*/
+
 export interface ButtonsProps {
   children: React.ReactNode;
   type: 'button' | 'submit' | 'reset';
@@ -47,4 +66,20 @@ export interface ButtonSwitchProps {
     iconLeft: IconType;
     iconRight: IconType;
   };
+}
+
+/*
+  STATES
+*/
+
+export interface langTypes {
+  en: string;
+  id: string;
+}
+
+export interface menuTypes {
+  id: number;
+  name: langTypes;
+  icon: IconType;
+  path: string;
 }

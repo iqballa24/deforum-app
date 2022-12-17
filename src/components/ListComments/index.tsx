@@ -1,6 +1,6 @@
 import React from 'react';
-import ThreadCard from '../ThreadCard';
-import { Button } from '../UI';
+import ThreadCard from '@/components/ThreadCard';
+import { Button } from '@/components/UI';
 
 const ListComments = () => {
   const inputCommentHandler = () => {

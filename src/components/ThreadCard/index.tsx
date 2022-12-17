@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiOutlineComment } from 'react-icons/ai';
-import { Label, SpinBox, AvatarImage } from '../UI';
-import { truncateText } from '../../utils';
+import { Label, SpinBox, AvatarImage } from '@/components/UI';
+import { truncateText } from '@/utils';
 
 const ThreadCard: React.FC<{ shortenBody: boolean; bordered: boolean }> = ({
   shortenBody,

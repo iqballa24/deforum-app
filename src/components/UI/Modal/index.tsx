@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ModalBackdrop from './ModalBackdrop';
 
-const portalElement = document.getElementById('overlays')!;
+const portalElement = document.getElementById('overlays') as HTMLElement;
 
 const Modal: React.FC<{
   onClose: () => void;

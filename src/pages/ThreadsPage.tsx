@@ -22,4 +22,4 @@ const ThreadPage = () => {
   );
 };
 
-export default ThreadPage;
+export default React.memo(ThreadPage);

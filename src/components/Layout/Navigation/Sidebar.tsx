@@ -1,30 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Settings from '../../Settings';
-import FormAddThreads from '../../Form/FormAddThread';
-import { Button, Modal } from '../../UI';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   AiOutlineLogout,
   AiOutlineSetting,
   AiOutlinePlus,
 } from 'react-icons/ai';
-import menus from '../../../constant/menus';
+
+import Settings from '@/components/Settings';
+import FormAddThreads from '@/components/Form/FormAddThread';
+import { Button, Modal } from '@/components/UI';
+import menus from '@/constant/menus';
+import { RootState } from '@/lib/types';
+import { uiActions } from '@/store/ui';
 
 const Sidebar = () => {
-  const [showModalAddThread, setShowModalAddThread] = useState<boolean>(false);
-  const [showModalSettings, setShowModalSettings] = useState(false);
+  const dispatch = useDispatch();
+  const { showModalAddThread, showModalSettings, language } = useSelector(
+    (state: RootState) => state.ui
+  );
 
   const toggleModalAddThread = () => {
-    setShowModalAddThread((prev) => !prev);
+    dispatch(uiActions.toggleModalAddThread());
   };
 
   const toggleModalSettings = () => {
-    setShowModalSettings((prev) => !prev);
+    dispatch(uiActions.toggleModalSettings());
   };
 
   const classNavLink =
     'flex flex-row items-center px-5 py-3 cursor-pointer space-x-5 whitespace-nowrap rounded hover:text-primary transition-all justify-center md:justify-start';
-  const active = 'bg-orange-light text-primary border-l-2 border-primary';
+  const active =
+    'bg-orange-light dark:bg-transparent text-primary border-l-2 border-primary';
 
   return (
     <React.Fragment>
@@ -41,7 +48,9 @@ const Sidebar = () => {
               }
             >
               <menu.icon size={20} />
-              <span className="hidden md:block">{menu.name.en}</span>
+              <span className="hidden md:block">
+                {menu.name[language as keyof typeof menu.name]}
+              </span>
             </NavLink>
           </li>
         ))}
@@ -51,21 +60,25 @@ const Sidebar = () => {
             onClick={toggleModalAddThread}
             isPrimary
             isFull
-            title="New Thread"
+            title={language === 'id' ? 'Tambah Thread' : 'Add Thread'}
           >
-            <span className="hidden md:block">New Thread</span>
+            <span className="hidden md:block">
+              {language === 'id' ? 'Tambah Thread' : 'Add Thread'}
+            </span>
             <AiOutlinePlus size={20} className="block md:hidden" />
           </Button>
         </li>
       </ul>
       <ul className="flex flex-col space-y-4">
         <li
-          title="Settings"
+          title={language === 'id' ? 'Pengaturan' : 'Settings'}
           className="flex flex-row items-center justify-center md:justify-start px-5 py-3 cursor-pointer rounded hover:text-primary"
           onClick={toggleModalSettings}
         >
           <AiOutlineSetting size={20} />
-          <span className="hidden md:block md:pl-5">Settings</span>
+          <span className="hidden md:block md:pl-5">
+            {language === 'id' ? 'Pengaturan' : 'Settings'}
+          </span>
         </li>
         <li className="h-full flex items-end">
           <Button
@@ -74,10 +87,12 @@ const Sidebar = () => {
             isDanger
             isFull
             start
-            title="Log out"
+            title={language === 'id' ? 'Keluar' : 'Log out'}
           >
             <AiOutlineLogout size={20} />
-            <span className="hidden md:block md:pl-5">Log out</span>
+            <span className="hidden md:block md:pl-5">
+              {language === 'id' ? 'Keluar' : 'Log out'}
+            </span>
           </Button>
         </li>
       </ul>
