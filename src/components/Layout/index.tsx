@@ -32,7 +32,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
           {/* SHOWED ONLY ON SMALL DEVICE */}
           <section
-            className="fixed bg-white w-full left-0 right-0 bottom-0 sm:hidden z-10"
+            className="fixed bg-white dark:bg-bg-dark w-full left-0 right-0 bottom-0 sm:hidden z-10"
             role="navigation"
             aria-label="Secondary"
           >
@@ -44,4 +44,4 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   );
 };
 
-export default Layout;
+export default React.memo(Layout);

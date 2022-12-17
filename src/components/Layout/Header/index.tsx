@@ -4,7 +4,6 @@ import { Container, AvatarImage } from '@/components/UI';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
-
   return (
     <header className="w-full flex flex-row justify-between items-center bg-white dark:bg-bg-dark py-4 shadow-sm dark:shadow-xl">
       <Container>

@@ -5,34 +5,32 @@ import {
   AiOutlineBarChart,
 } from 'react-icons/ai';
 
-const menus = [
+import { menuTypes } from '@/lib/types';
+
+const menus: menuTypes[] = [
   {
     id: 1,
     name: { en: 'Home', id: 'Beranda' },
     icon: AiOutlineHome,
     path: '/threads',
-    active: true,
   },
   {
     id: 2,
     name: { en: 'My Threads', id: 'Threads Saya' },
     icon: AiOutlineFire,
     path: '/my-threads',
-    active: false,
   },
   {
     id: 3,
     name: { en: 'My Comments', id: 'Komentar Saya' },
     icon: AiOutlineComment,
     path: '/my-comments',
-    active: false,
   },
   {
     id: 4,
-    name: { en: 'Leaderboards', id: 'Peringkat' },
+    name: { en: 'Leaderboards', id: 'Papan Peringkat' },
     icon: AiOutlineBarChart,
     path: '/leaderboards',
-    active: false,
   },
 ];
 

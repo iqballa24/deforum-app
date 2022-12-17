@@ -5,7 +5,7 @@ import menus from '@/constant/menus';
 const BottomBar = () => {
   const classNavLink =
     'flex justify-center py-5 cursor-pointer hover:text-primary transition-all';
-  const active = 'bg-orange-light text-primary border-t-2 border-primary';
+  const active = 'bg-orange-light dark:bg-transparent text-primary border-t-2 border-primary';
 
   return (
     <ul className="flex flex-row items-center w-full shadow-md">

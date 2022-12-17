@@ -4,7 +4,7 @@ import { MdOutlineSearch } from 'react-icons/md';
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearchHandler, value }) => {
   return (
-    <div className="relative w-full text-sm font-light text-grey-dark rounded bg-white border dark:bg-transparent dark:border dark:border-primary pl-10">
+    <div className="relative w-full text-sm font-light text-grey-dark dark:text-white rounded bg-white border dark:bg-transparent dark:border dark:border-primary pl-10">
       <span className="absolute left-[20px] top-[13px]">
         <MdOutlineSearch size={20} />
       </span>

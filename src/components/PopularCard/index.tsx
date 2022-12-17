@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { WrapperCard } from '@/components/UI';
+import { RootState } from '@/lib/types';
 
 const PopularCard = () => {
+  const { language } = useSelector((state: RootState) => state.ui);
   const [selectedCategory, setSelectedCategory] = useState('');
   const categories = [
     '#worldcup2022',
@@ -18,7 +21,7 @@ const PopularCard = () => {
 
   return (
     <WrapperCard>
-      <h1 className="font-bold mb-5 text-sm">Popular Category</h1>
+      <h1 className="font-bold mb-5 text-sm">{language === 'id' ? 'Kategori Populer': 'Popular Category'}</h1>
       <ul className="flex flex-col space-y-3 overflow-hidden text-sm">
         {categories.map((item, index) => (
           <li

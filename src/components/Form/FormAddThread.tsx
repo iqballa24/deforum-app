@@ -14,9 +14,9 @@ const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       variants={dropIn}
       initial="hidden"
       animate="visible"
-      className="fixed left-[50%] -translate-x-2/4 z-20 w-full flex flex-col max-w-2xl bg-white border rounded-lg overflow-hidden"
+      className="fixed left-[50%] -translate-x-2/4 z-20 w-full flex flex-col max-w-2xl bg-white dark:bg-bg-dark border rounded-lg overflow-hidden"
     >
-      <div className="w-full flex flex-row items-center justify-between py-3 px-5 bg-orange-light">
+      <div className="w-full flex flex-row items-center justify-between py-3 px-5 bg-orange-light dark:bg-primary">
         <span>New Thread</span>
         <AiOutlineClose
           size={16}

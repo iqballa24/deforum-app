@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { uiState } from 'lib/types/rootState';
+import { uiState } from 'lib/types';
 
 const initialState: uiState = {
   showModalSettings: false,
   showModalAddThread: false,
+  isDarkMode: !!localStorage.getItem('darkMode'),
+  language: localStorage.getItem('language') ?? 'en',
 };
+
+console.log(localStorage.getItem('language') ?? 'en');
 
 const uiSlice = createSlice({
   name: 'ui',
@@ -15,6 +19,13 @@ const uiSlice = createSlice({
     },
     toggleModalAddThread(state) {
       state.showModalAddThread = !state.showModalAddThread;
+    },
+    toggleTheme(state, { payload }) {
+      state.isDarkMode = payload;
+    },
+    toggleLanguage(state, { payload }) {
+      console.log(payload)
+      state.language = payload;
     },
   },
 });

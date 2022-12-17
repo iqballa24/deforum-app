@@ -11,7 +11,7 @@ const ItemTopUser: React.FC<ItemTopUserProps> = ({ name, score, fontSize }) => {
     >
       <div className="w-9/12 flex flex-row items-center space-x-2">
         <AvatarImage name={name} size={24} />
-        <span className="text-primary overflow-hidden whitespace-nowrap truncate">
+        <span className="text-primary dark:text-white overflow-hidden whitespace-nowrap truncate">
           {name}
         </span>
       </div>
