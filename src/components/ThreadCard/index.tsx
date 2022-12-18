@@ -1,42 +1,45 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AiOutlineComment } from 'react-icons/ai';
 import { Label, SpinBox, AvatarImage } from '@/components/UI';
-import { truncateText } from '@/utils';
+import { truncateText, formatDistanceDate } from '@/utils';
+import { ThreadCardProps } from '@/lib/types';
 
-const ThreadCard: React.FC<{ shortenBody: boolean; bordered: boolean }> = ({
-  shortenBody,
-  bordered,
-}) => {
-  const string =
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
-  const body = shortenBody ? truncateText(string, 200) : string;
+const ThreadCard: React.FC<ThreadCardProps> = ({ thread }) => {
+  const navigate = useNavigate();
+  const body = truncateText(thread.body, 200);
+  const date = formatDistanceDate(thread.createdAt);
+  const score = thread.upVotesBy.length - thread.downVotesBy.length;
 
   return (
-    <li
-      className={`flex flex-row ${
-        bordered ? 'py-6 px-4 md:py-8 md:px-6 border mt-7' : 'p-3'
-      } cursor-pointer`}
-    >
+    <li className="flex flex-row py-6 px-4 md:py-8 md:px-6 border mt-7 hover:-translate-y-1 transition-transform">
       <div className="w-1/12 flex flex-col justify-center items-center text-grey-light">
-        <SpinBox />
+        <SpinBox score={score} />
       </div>
       <div className="w-11/12 flex flex-col pl-2 space-y-3">
-        <Label name="#worldcup2022" />
-        <h1 className="font-bold text-base overflow-hidden whitespace-nowrap truncate">
-          Indonesia as Host World Cup U-20
+        <Label category={thread.category} />
+        <h1
+          title={thread.title}
+          className="font-bold text-base cursor-pointer"
+          onClick={() => navigate(thread.id)}
+        >
+          {thread.title}
         </h1>
-        <p className="font-light pb-8 border-b">{body}</p>
+        <div
+          className="font-light pb-8 border-b"
+          dangerouslySetInnerHTML={{ __html: body }}
+        ></div>
         <div className="flex flex-col sm:flex-row justify-between space-y-2 sm:space-y-0">
           <div className="flex flex-row items-center space-x-2">
-            <AvatarImage name="Iqbal Nugraha" size={24} />
+            <AvatarImage name={thread.owner?.name ?? 'User'} size={24} />
             <p className="text-sm">
-              Posted By <em className="text-primary">Iqbal Nugraha</em> - 2
-              hours ago
+              Posted By <em className="text-primary">{thread.owner?.name}</em> -{' '}
+              {date}
             </p>
           </div>
-          <div className="flex flex-row items-center space-x-3">
+          <div className="flex flex-row items-center space-x-3 cursor-pointer hover:text-primary" onClick={() => navigate(thread.id)} >
             <AiOutlineComment size={20} />
-            <span className="text-sm">2k</span>
+            <span className="text-sm">{thread.totalComments}</span>
           </div>
         </div>
       </div>

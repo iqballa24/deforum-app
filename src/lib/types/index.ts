@@ -2,21 +2,6 @@ import React from 'react';
 import { IconType } from 'react-icons/lib';
 
 /*
-  TYPES STORE
-*/
-
-export type uiState = {
-  showModalSettings: boolean;
-  showModalAddThread: boolean;
-  isDarkMode: boolean;
-  language: string;
-};
-
-export interface RootState {
-  ui: uiState;
-}
-
-/*
   PROPS TYPES
 */
 
@@ -39,16 +24,6 @@ export interface ItemTopUserProps {
   fontSize: string;
 }
 
-export interface leaderBoardsItem {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    avatar: string;
-  };
-  score: number;
-}
-
 export interface SearchBarProps {
   value: string;
   onSearchHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -68,9 +43,52 @@ export interface ButtonSwitchProps {
   };
 }
 
+export interface ThreadCardProps {
+  thread: threadItemTypes;
+}
+
 /*
   STATES
 */
+
+export interface leaderBoardsItem {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    avatar: string;
+  };
+  score: number;
+}
+
+export interface threadItemTypes {
+  id: string;
+  title: string;
+  body: string;
+  category: string;
+  createdAt: string;
+  ownerId: string;
+  upVotesBy: string[];
+  downVotesBy: string[];
+  totalComments: number;
+  owner?: userTypes;
+}
+
+export interface commentTypes {
+  id: string;
+  content: string;
+  createdAt: string;
+  owner: userTypes;
+  upVotesBy: string[];
+  downVotesBy: string[];
+}
+
+export interface userTypes {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+}
 
 export interface langTypes {
   en: string;

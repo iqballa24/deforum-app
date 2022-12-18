@@ -1,8 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 
-const SpinBox = () => {
-  const [counter, setCounter] = useState(0);
+const SpinBox: React.FC<{ score: number }> = ({ score }) => {
+  const [counter, setCounter] = useState(score);
+
+  useEffect(() => {
+    setCounter(score);
+  }, [score]);
 
   const onAddCounter = useCallback(() => {
     setCounter((prev) => prev + 1);
@@ -13,7 +17,7 @@ const SpinBox = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <div className="flex flex-col items-center">
       <button type="button" onClick={onAddCounter} aria-label="Arrow up">
         <AiOutlineArrowUp
           size={20}
@@ -27,7 +31,7 @@ const SpinBox = () => {
           className="hover:text-red cursor-pointer"
         />
       </button>
-    </React.Fragment>
+    </div>
   );
 };
 

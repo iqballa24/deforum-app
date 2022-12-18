@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { Sidebar, BottomBar } from './Navigation/';
+import LoadingBar from 'react-redux-loading-bar';
 
 import PopularCard from '@/components/PopularCard';
 import TopUsersCard from '@/components/TopUsersCard';
@@ -10,6 +11,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <React.Fragment>
       <Header />
+      <LoadingBar className="absolute bg-primary h-[2px]"/>
       <main className="py-8 h-full">
         <Container>
           <section

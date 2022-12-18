@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
 import { WrapperCard } from '@/components/UI';
-import { RootState } from '@/lib/types';
+import { uiActions } from '@/store/ui';
 
 const PopularCard = () => {
-  const { language } = useSelector((state: RootState) => state.ui);
+  const dispatch = useAppDispatch();
+  const { ui, category } = useAppSelector((state) => state);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const categories = [
-    '#worldcup2022',
-    '#pestaboladunia',
-    '#FIFAMobileIndonesia',
-    '#IndonesiaJuara',
-    '#2021JadiProgrammer',
-  ];
 
   const onSelectCategory = (category: string) => {
     if (selectedCategory === category) return setSelectedCategory('');
     setSelectedCategory(category);
   };
 
+  useEffect(() => {
+    dispatch(uiActions.changeCategory(selectedCategory.replace('#','')));
+  }, [selectedCategory]);
+
   return (
     <WrapperCard>
-      <h1 className="font-bold mb-5 text-sm">{language === 'id' ? 'Kategori Populer': 'Popular Category'}</h1>
+      <h1 className="font-bold mb-5 text-sm">
+        {ui.language === 'id' ? 'Kategori Populer' : 'Popular Category'}
+      </h1>
       <ul className="flex flex-col space-y-3 overflow-hidden text-sm">
-        {categories.map((item, index) => (
+        {category.data.map((item, index) => (
           <li
             key={index}
             className={
@@ -37,7 +37,7 @@ const PopularCard = () => {
               title={item}
               onClick={onSelectCategory.bind(null, item)}
             >
-              {item}
+              #{item}
             </button>
           </li>
         ))}

@@ -16,7 +16,7 @@ const ThreadPage = () => {
     <React.Fragment>
       <SearchBar value={searchValue} onSearchHandler={searchHandler} />
       <motion.ul initial="initial" animate="animate" variants={pageMotion}>
-        <ThreadCard shortenBody bordered />
+        {/* <ThreadCard shortenBody bordered /> */}
       </motion.ul>
     </React.Fragment>
   );

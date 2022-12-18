@@ -1,8 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@/lib/hooks/useRedux';
 
-import { RootState } from '@/lib/types';
 import Layout from './components/Layout';
 import { Spinner } from './components/UI';
 
@@ -14,7 +13,7 @@ const DetailThreadPage = React.lazy(() => import('./pages/DetailThread'));
 const ListComments = React.lazy(() => import('./components/ListComments'));
 
 function App() {
-  const { isDarkMode } = useSelector((state: RootState) => state.ui);
+  const { isDarkMode } = useAppSelector((state) => state.ui);
 
   useEffect(() => {
     if (isDarkMode) document.body.classList.add('dark');

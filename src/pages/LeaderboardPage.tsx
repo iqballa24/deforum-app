@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 
-import { RootState } from '@/lib/types';
-import { ItemTopUser } from '../components/UI';
-import leaderboards from '../constant/leaderboards';
-import { pageMotion } from '../constant/transition';
-import sortUserByScore from '../utils/sortUserByScore';
+import { ItemTopUser } from '@/components/UI';
+import { pageMotion } from '@/constant/transition';
+import sortUserByScore from '@/utils/sortUserByScore';
+import { asyncReceiveLeaderboards } from '@/store/leaderboards/action';
 
 const LeaderboardPage = () => {
-  const { language } = useSelector((state: RootState) => state.ui);
-  const sortUsersScore = sortUserByScore(leaderboards);
+  const dispatch = useAppDispatch();
+  const { ui, leaderboards } = useAppSelector((state) => state);
+  const sortUsersScore = sortUserByScore(leaderboards.data);
+  const firstRender = useRef(true);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      dispatch(asyncReceiveLeaderboards());
+      firstRender.current = false;
+    }
+  }, []);
+
   return (
     <React.Fragment>
       <h1 className="font-bold text-base text-center mb-8">
-        {language === 'id'
+        {ui.language === 'id'
           ? 'Papan Peringkat Pengguna Aktif'
           : 'Leaderboards Top Active Users'}
       </h1>

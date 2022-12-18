@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
-import { RootState } from '@/lib/types';
 import { pageMotion } from '@/constant/transition';
 import { SearchBar, EmptyState } from '@/components/UI';
 
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
+
 const CommentsPage = () => {
-  const { language } = useSelector((state: RootState) => state.ui);
+  const { language } = useAppSelector((state) => state.ui);
   const [searchValue, setSearchValue] = useState('');
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
