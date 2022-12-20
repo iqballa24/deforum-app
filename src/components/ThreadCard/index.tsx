@@ -21,7 +21,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({ thread }) => {
         <h1
           title={thread.title}
           className="font-bold text-base cursor-pointer"
-          onClick={() => navigate(thread.id)}
+          onClick={() => navigate(`/detail/${thread.id}`)}
         >
           {thread.title}
         </h1>
@@ -37,7 +37,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({ thread }) => {
               {date}
             </p>
           </div>
-          <div className="flex flex-row items-center space-x-3 cursor-pointer hover:text-primary" onClick={() => navigate(thread.id)} >
+          <div className="flex flex-row items-center space-x-3 cursor-pointer hover:text-primary" onClick={() => navigate(`/detail/${thread.id}`)} >
             <AiOutlineComment size={20} />
             <span className="text-sm">{thread.totalComments}</span>
           </div>

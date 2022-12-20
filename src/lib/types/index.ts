@@ -9,6 +9,7 @@ export interface ButtonsProps {
   children: React.ReactNode;
   type: 'button' | 'submit' | 'reset';
   title: string;
+  disabled?: boolean;
   isPrimary?: boolean;
   isFull?: boolean;
   isDanger?: boolean;
@@ -30,6 +31,7 @@ export interface SearchBarProps {
 }
 
 export interface InputProps {
+  name: string;
   placeholder: string;
   type: string;
 }
@@ -52,16 +54,11 @@ export interface ThreadCardProps {
 */
 
 export interface leaderBoardsItem {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    avatar: string;
-  };
+  user: userTypes;
   score: number;
 }
 
-export interface threadItemTypes {
+export interface threadTypes {
   id: string;
   title: string;
   body: string;
@@ -70,8 +67,15 @@ export interface threadItemTypes {
   ownerId: string;
   upVotesBy: string[];
   downVotesBy: string[];
+}
+
+export interface threadItemTypes extends threadTypes {
   totalComments: number;
   owner?: userTypes;
+}
+
+export interface detailThreadsTypes extends threadTypes {
+  comments: commentTypes[];
 }
 
 export interface commentTypes {
@@ -100,4 +104,25 @@ export interface menuTypes {
   name: langTypes;
   icon: IconType;
   path: string;
+}
+
+export type createThreadTypes = {
+  title: string;
+  body: string;
+  category: string;
+};
+
+export type registerTypes = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+export interface FormRegisterTypes extends registerTypes {
+  confirmPassword: string;
+}
+
+export interface FormLoginTypes {
+  email: string;
+  password: string;
 }

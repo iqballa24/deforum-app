@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { threadItemTypes } from '@/lib/types';
+import { detailThreadsTypes } from '@/lib/types';
+
+type SliceState = { data: detailThreadsTypes };
 
 const initialState = {
   id: '',
@@ -16,10 +18,13 @@ const initialState = {
 
 const threadDetailSlice = createSlice({
   name: 'thread_Detail',
-  initialState: { data: initialState },
+  initialState: { data: initialState } as SliceState,
   reducers: {
     receiveThreadDetail(state, { payload }) {
       state.data = payload;
+    },
+    receiveCommentThread(state, { payload }) {
+      state.data.comments = [payload, ...state.data.comments];
     },
   },
 });

@@ -1,4 +1,6 @@
+import { Dispatch } from 'redux';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import toast from 'react-hot-toast';
 import { threadItemTypes } from '@/lib/types';
 import API from '@/lib/service/API';
 import { threadsAction } from '@/store/threads';
@@ -6,7 +8,7 @@ import { usersAction } from '@/store/users';
 import { categoryActions } from '@/store/category';
 
 export const asyncPopulateUsersAndThreads = () => {
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch) => {
     try {
       dispatch(showLoading());
       const threads = await API.getAllThreads();
@@ -24,6 +26,7 @@ export const asyncPopulateUsersAndThreads = () => {
       } else {
         console.log('Unexpected error', err);
       }
+      toast.error('Something went wrong');
     } finally {
       dispatch(hideLoading());
     }

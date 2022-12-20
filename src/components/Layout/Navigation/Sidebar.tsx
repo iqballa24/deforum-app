@@ -12,6 +12,7 @@ import FormAddThreads from '@/components/Form/FormAddThread';
 import { Button, Modal } from '@/components/UI';
 import menus from '@/constant/menus';
 import { uiActions } from '@/store/ui';
+import { unsetAuthUser } from '@/store/auth/action';
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -25,6 +26,10 @@ const Sidebar = () => {
 
   const toggleModalSettings = () => {
     dispatch(uiActions.toggleModalSettings());
+  };
+
+  const logoutHandler = () => {
+    dispatch(unsetAuthUser());
   };
 
   const classNavLink =
@@ -82,7 +87,7 @@ const Sidebar = () => {
         <li className="h-full flex items-end">
           <Button
             type="button"
-            onClick={() => console.log('new thread')}
+            onClick={logoutHandler}
             isDanger
             isFull
             start

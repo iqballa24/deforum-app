@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { pageMotion } from '@/constant/transition';
 import { SearchBar, EmptyState } from '@/components/UI';
 
-import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
+import { useAppSelector } from '@/lib/hooks/useRedux';
 
 const CommentsPage = () => {
   const { language } = useAppSelector((state) => state.ui);
