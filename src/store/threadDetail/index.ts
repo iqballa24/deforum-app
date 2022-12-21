@@ -26,6 +26,36 @@ const threadDetailSlice = createSlice({
     receiveCommentThread(state, { payload }) {
       state.data.comments = [payload, ...state.data.comments];
     },
+    toggleUpVoteComment(state, { payload }) {
+      const newArr = state.data.comments.map((comment) => {
+        if (comment.id === payload.commentId) {
+          return {
+            ...comment,
+            upVotesBy: comment.upVotesBy.includes(payload.ownerId)
+              ? comment.upVotesBy.filter((id) => id !== payload.ownerId)
+              : comment.upVotesBy.concat([payload.ownerId]),
+          };
+        } else {
+          return { ...comment };
+        }
+      });
+      state.data.comments = newArr;
+    },
+    toggleDownVoteComment(state, { payload }) {
+      const newArr = state.data.comments.map((comment) => {
+        if (comment.id === payload.commentId) {
+          return {
+            ...comment,
+            downVotesBy: comment.downVotesBy.includes(payload.ownerId)
+              ? comment.downVotesBy.filter((id) => id !== payload.ownerId)
+              : comment.downVotesBy.concat([payload.ownerId]),
+          };
+        } else {
+          return { ...comment };
+        }
+      });
+      state.data.comments = newArr;
+    },
   },
 });
 

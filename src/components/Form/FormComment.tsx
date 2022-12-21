@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '@/lib/hooks/useRedux';
 import { Button } from '@/components/UI';
@@ -12,7 +11,6 @@ export type contentTypes = {
 
 const FormComment = () => {
   const dispatch = useAppDispatch();
-  const { threadId } = useParams();
 
   const {
     register,
@@ -26,9 +24,7 @@ const FormComment = () => {
 
   const submitHandler = async (data: contentTypes) => {
     try {
-      if (threadId) {
-        await dispatch(asyncCreateCommentThread(data.content, threadId));
-      }
+      await dispatch(asyncCreateCommentThread(data.content));
       reset({ content: '' });
     } catch (err) {
       console.log(err);

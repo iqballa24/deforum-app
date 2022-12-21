@@ -134,6 +134,56 @@ const API = (() => {
     return detailThread;
   }
 
+  async function upVoteThread(threadId: string) {
+    const res = await _fetchWithAuth(
+      `${BASE_URL}/threads/${threadId}/up-vote`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const resJson = await res.json();
+
+    const { status, message } = resJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const {
+      data: { vote },
+    } = resJson;
+
+    return vote;
+  }
+
+  async function downVoteThread(threadId: string) {
+    const res = await _fetchWithAuth(
+      `${BASE_URL}/threads/${threadId}/down-vote`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const resJson = await res.json();
+
+    const { status, message } = resJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const {
+      data: { vote },
+    } = resJson;
+
+    return vote;
+  }
+
   async function createCommentThread(content: string, id: string) {
     const res = await _fetchWithAuth(`${BASE_URL}/threads/${id}/comments`, {
       method: 'POST',
@@ -156,6 +206,56 @@ const API = (() => {
     } = resJson;
 
     return comment;
+  }
+
+  async function upVoteComment(threadId: string, commentId: string) {
+    const res = await _fetchWithAuth(
+      `${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const resJson = await res.json();
+
+    const { status, message } = resJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const {
+      data: { vote },
+    } = resJson;
+
+    return vote;
+  }
+
+  async function downVoteComment(threadId: string, commentId: string) {
+    const res = await _fetchWithAuth(
+      `${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const resJson = await res.json();
+
+    const { status, message } = resJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const {
+      data: { vote },
+    } = resJson;
+
+    return vote;
   }
 
   async function getOwnProfile() {
@@ -221,6 +321,10 @@ const API = (() => {
     getLeaderboards,
     createThread,
     createCommentThread,
+    upVoteThread,
+    downVoteThread,
+    upVoteComment,
+    downVoteComment,
   };
 })();
 

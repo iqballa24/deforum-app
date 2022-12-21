@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
 import { RiEnglishInput } from 'react-icons/ri';
 import {
   MdClose,
@@ -8,16 +8,14 @@ import {
   MdOutlineNightlight,
   MdOutlineGTranslate,
 } from 'react-icons/md';
-
-import { RootState } from '@/lib/types';
 import { ButtonSwitch } from '@/components/UI';
 import { dropIn } from '@/constant/transition';
 import { uiActions } from '@/store/ui';
 
 const Settings: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const dispatch = useDispatch();
-  const { isDarkMode, language } = useSelector(
-    (state: RootState) => state.ui
+  const dispatch = useAppDispatch();
+  const { isDarkMode, language } = useAppSelector(
+    (state) => state.ui
   );
 
   const switchThemeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

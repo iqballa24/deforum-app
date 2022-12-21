@@ -8,6 +8,7 @@ import { pageMotion } from '@/constant/transition';
 import { asyncPopulateUsersAndThreads } from '@/store/shared/action';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import { threadItemTypes, userTypes } from '@/lib/types';
+import { asyncUpVoteThread, asyncDownVoteThread } from '@/store/threads/action';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +28,14 @@ const HomePage = () => {
     setSearchValue(value);
   };
 
+  const upVoteHandler = (id: string) => {
+    dispatch(asyncUpVoteThread(id));
+  };
+
+  const downVoteHandler = (id: string) => {
+    dispatch(asyncDownVoteThread(id));
+  };
+
   const threadsList = threads.data
     .filter((thread: threadItemTypes) =>
       thread.category.toLowerCase().includes(ui.queryCategory.toLowerCase())
@@ -44,7 +53,12 @@ const HomePage = () => {
       <SearchBar value={searchValue} onSearchHandler={searchHandler} />
       <motion.ul initial="initial" animate="animate" variants={pageMotion}>
         {threadsList.map((thread: threadItemTypes) => (
-          <ThreadCard key={thread.id} thread={{ ...thread }} />
+          <ThreadCard
+            key={thread.id}
+            thread={{ ...thread }}
+            onUpVoteHandler={upVoteHandler}
+            onDownVoteHandler={downVoteHandler}
+          />
         ))}
       </motion.ul>
     </React.Fragment>

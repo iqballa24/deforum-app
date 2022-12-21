@@ -6,11 +6,19 @@ import { commentTypes } from '@/lib/types';
 import { SpinBox, AvatarImage } from '@/components/UI';
 import FormComment from '@/components/Form/FormComment';
 
+import { useAppDispatch } from '@/lib/hooks/useRedux';
+import { asyncUpVoteComment, asyncDownVoteComment } from '@/store/threadDetail/action';
+
 const CommentsListPage = () => {
+  const dispatch = useAppDispatch();
   const comments: commentTypes[] = useOutletContext();
 
-  const inputCommentHandler = () => {
-    console.log('tester');
+  const upVoteHandler = (id: string) => {
+    dispatch(asyncUpVoteComment(id));
+  };
+
+  const downVoteHandler = (id: string) => {
+    dispatch(asyncDownVoteComment(id));
   };
 
   return (
@@ -18,11 +26,16 @@ const CommentsListPage = () => {
       <FormComment />
       <ul>
         {comments.map((comment: commentTypes) => {
-          const score = comment.upVotesBy.length - comment.downVotesBy.length;
           return (
             <li key={comment.id} className="flex flex-row items-center my-10">
               <div className="w-2/12">
-                <SpinBox score={score} />
+                <SpinBox
+                  id={comment.id}
+                  upVotesBy={comment.upVotesBy}
+                  downVotesBy={comment.downVotesBy}
+                  onUpVoteHandler={upVoteHandler}
+                  onDownVoteHandler={downVoteHandler}
+                />
               </div>
               <div className="w-10/12 flex flex-col space-y-3">
                 <div

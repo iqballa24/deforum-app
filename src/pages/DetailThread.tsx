@@ -3,14 +3,13 @@ import { Outlet, Link, useParams } from 'react-router-dom';
 import { AiOutlineComment, AiOutlineArrowLeft } from 'react-icons/ai';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
 import { asyncReceiveThreadDetail } from '@/store/threadDetail/action';
-import { SpinBox, AvatarImage } from '@/components/UI';
+import { AvatarImage } from '@/components/UI';
 import { formatDistanceDate } from '@/utils';
 
 const DetailThread = () => {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.threadDetail);
   const { threadId } = useParams();
-  const score = data.upVotesBy.length - data.downVotesBy.length;
 
   useEffect(() => {
     if (threadId) dispatch(asyncReceiveThreadDetail(threadId));
@@ -30,9 +29,6 @@ const DetailThread = () => {
         <span className="transition-all">Back</span>
       </Link>
       <div className="flex flex-row items-center my-10">
-        <div className="w-2/12">
-          <SpinBox score={score} />
-        </div>
         <div className="w-10/12 flex flex-col space-y-3">
           <h1 className="font-bold text-base cursor-pointer">{data.title}</h1>
           <div
@@ -62,7 +58,7 @@ const DetailThread = () => {
           Load comments
         </Link>
       </div>
-      <Outlet context={data.comments}/>
+      <Outlet context={data.comments} />
     </React.Fragment>
   );
 };

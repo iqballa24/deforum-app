@@ -47,6 +47,16 @@ export interface ButtonSwitchProps {
 
 export interface ThreadCardProps {
   thread: threadItemTypes;
+  onUpVoteHandler: (id: string) => void;
+  onDownVoteHandler: (id: string) => void;
+}
+
+export interface SpinBoxProps {
+  id: string;
+  upVotesBy: string[];
+  downVotesBy: string[];
+  onUpVoteHandler: (id: string) => void;
+  onDownVoteHandler: (id: string) => void;
 }
 
 /*
@@ -75,6 +85,7 @@ export interface threadItemTypes extends threadTypes {
 }
 
 export interface detailThreadsTypes extends threadTypes {
+  owner?: userTypes;
   comments: commentTypes[];
 }
 
