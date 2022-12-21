@@ -1,27 +1,68 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+import ThreadCard from '@/components/ThreadCard';
 import { pageMotion } from '@/constant/transition';
 import { SearchBar, EmptyState } from '@/components/UI';
 
-import { useAppSelector } from '@/lib/hooks/useRedux';
+import { asyncPopulateUsersAndThreads } from '@/store/shared/action';
+import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
+import { threadItemTypes, userTypes } from '@/lib/types';
+import { asyncUpVoteThread, asyncDownVoteThread } from '@/store/threads/action';
 
 const CommentsPage = () => {
-  const { language } = useAppSelector((state) => state.ui);
+  const dispatch = useAppDispatch();
+  const { auth, threads, ui, users } = useAppSelector((state) => state);
   const [searchValue, setSearchValue] = useState('');
+  const firstRender = useRef<boolean>(true);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      dispatch(asyncPopulateUsersAndThreads());
+      firstRender.current = false;
+    }
+  }, []);
+
+  const upVoteHandler = (id: string) => {
+    dispatch(asyncUpVoteThread(id));
+  };
+
+  const downVoteHandler = (id: string) => {
+    dispatch(asyncDownVoteThread(id));
+  };
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchValue(value);
   };
 
+  const threadsList = threads.data
+    .filter((thread: threadItemTypes) => thread.ownerId === auth.user.id)
+    .filter((thread: threadItemTypes) =>
+      thread.category.toLowerCase().includes(ui.queryCategory.toLowerCase())
+    )
+    .filter((thread: threadItemTypes) =>
+      thread.title.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    .map((thread: threadItemTypes) => ({
+      ...thread,
+      owner: users.data.find((user: userTypes) => user.id === thread.ownerId),
+    }));
+
   return (
     <React.Fragment>
       <SearchBar value={searchValue} onSearchHandler={searchHandler} />
-      <motion.div initial="initial" animate="animate" variants={pageMotion}>
-        <EmptyState titleState={language === 'id' ? 'Komentar' : 'Comments'} />
-      </motion.div>
+      {threadsList.length === 0 && <EmptyState titleState={ui.language === 'id' ? 'Komentar' : 'Comments'} />}
+      <motion.ul initial="initial" animate="animate" variants={pageMotion}>
+        {threadsList.map((thread: threadItemTypes) => (
+          <ThreadCard
+            key={thread.id}
+            thread={{ ...thread }}
+            onUpVoteHandler={upVoteHandler}
+            onDownVoteHandler={downVoteHandler}
+          />
+        ))}
+      </motion.ul>
     </React.Fragment>
   );
 };

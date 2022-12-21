@@ -32,7 +32,7 @@ const RegisterPage = () => {
       animate="animate"
       variants={slideRight}
       transition={{ type: 'linear' }}
-      className="w-full flex justify-center relative overflow-scroll scrollbar-hide py-10"
+      className="w-full flex justify-center relative overflow-scroll scrollbar-hide py-10 px-5"
     >
       <section className="flex flex-col w-full max-w-lg space-y-10 ">
         <div className="flex flex-row items-center justify-center md:space-x-3">

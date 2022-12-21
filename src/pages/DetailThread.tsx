@@ -29,7 +29,7 @@ const DetailThread = () => {
         <span className="transition-all">Back</span>
       </Link>
       <div className="flex flex-row items-center my-10">
-        <div className="w-10/12 flex flex-col space-y-3">
+        <div className="w-12/12 flex flex-col space-y-3">
           <h1 className="font-bold text-base cursor-pointer">{data.title}</h1>
           <div
             className="font-light pb-8"

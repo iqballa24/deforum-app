@@ -40,6 +40,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           >
             <BottomBar />
           </section>
+          <div className='absolute'></div>
         </Container>
       </main>
     </React.Fragment>
