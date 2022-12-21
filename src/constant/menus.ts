@@ -21,12 +21,6 @@ const menus: menuTypes[] = [
     path: '/my-threads',
   },
   {
-    id: 3,
-    name: { en: 'My Comments', id: 'Komentar Saya' },
-    icon: AiOutlineComment,
-    path: '/my-comments',
-  },
-  {
     id: 4,
     name: { en: 'Leaderboards', id: 'Papan Peringkat' },
     icon: AiOutlineBarChart,

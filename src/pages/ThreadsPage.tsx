@@ -8,6 +8,7 @@ import { pageMotion } from '@/constant/transition';
 import { asyncPopulateUsersAndThreads } from '@/store/shared/action';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
 import { threadItemTypes, userTypes } from '@/lib/types';
+import { asyncUpVoteThread, asyncDownVoteThread } from '@/store/threads/action';
 
 const ThreadPage = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,14 @@ const ThreadPage = () => {
       firstRender.current = false;
     }
   }, []);
+
+  const upVoteHandler = (id: string) => {
+    dispatch(asyncUpVoteThread(id));
+  };
+
+  const downVoteHandler = (id: string) => {
+    dispatch(asyncDownVoteThread(id));
+  };
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -43,10 +52,15 @@ const ThreadPage = () => {
   return (
     <React.Fragment>
       <SearchBar value={searchValue} onSearchHandler={searchHandler} />
-      {threadsList.length === 0 && <EmptyState titleState='thread'/>}
+      {threadsList.length === 0 && <EmptyState titleState="thread" />}
       <motion.ul initial="initial" animate="animate" variants={pageMotion}>
         {threadsList.map((thread: threadItemTypes) => (
-          <ThreadCard key={thread.id} thread={{ ...thread }} />
+          <ThreadCard
+            key={thread.id}
+            thread={{ ...thread }}
+            onUpVoteHandler={upVoteHandler}
+            onDownVoteHandler={downVoteHandler}
+          />
         ))}
       </motion.ul>
     </React.Fragment>

@@ -35,7 +35,7 @@ const FormLogin: React.FC<{
         <label htmlFor="password">Password</label>
         <input
           id="password"
-          type="text"
+          type="password"
           placeholder="Your password"
           className={`bg-transparent border py-2 px-3 rounded ${
             errors.password && 'border-red-500'
