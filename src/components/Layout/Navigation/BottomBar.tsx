@@ -1,14 +1,24 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import menus from '@/constant/menus';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { useAppDispatch } from '@/lib/hooks/useRedux';
+import { uiActions } from '@/store/ui';
 
 const BottomBar = () => {
+  const dispatch = useAppDispatch();
+
   const classNavLink =
     'flex justify-center py-5 cursor-pointer hover:text-primary transition-all';
-  const active = 'bg-orange-light dark:bg-transparent text-primary border-t-2 border-primary';
+  const active =
+    'bg-orange-light dark:bg-transparent text-primary border-t-2 border-primary';
+
+  const toggleModalAddThread = () => {
+    dispatch(uiActions.toggleModalAddThread());
+  };
 
   return (
-    <ul className="flex flex-row items-center w-full shadow-md">
+    <ul className="relative flex flex-row items-center w-full shadow-md">
       {menus.map((menu) => (
         <li key={menu.id} title={menu.name.en} className="flex-1">
           <NavLink
@@ -21,8 +31,14 @@ const BottomBar = () => {
           </NavLink>
         </li>
       ))}
+      <li
+        className="absolute right-5 -top-20 rounded-[50%] bg-primary hover:bg-orange-500  p-3 cursor-pointer"
+        onClick={toggleModalAddThread}
+      >
+        <AiOutlinePlus size={20} />
+      </li>
     </ul>
   );
 };
 
-export default BottomBar;
+export default React.memo(BottomBar);

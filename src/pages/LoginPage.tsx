@@ -27,7 +27,7 @@ const LoginPage = () => {
       variants={slideRight}
       className="w-full h-[100vh] relative"
     >
-      <section className="flex flex-col fixed top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 w-full max-w-lg space-y-10">
+      <section className="flex flex-col p-5 fixed top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 w-full max-w-lg space-y-10">
         <div className="flex flex-row items-center justify-center md:space-x-3">
           <img
             src="/LOGO.svg"
