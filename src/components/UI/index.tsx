@@ -9,7 +9,6 @@ import SpinBox from './SpinBox';
 import EmptyState from './EmptyState';
 import AvatarImage from './AvatarImage';
 import Modal from './Modal';
-import Input from './Input';
 import Spinner from './Spinner';
 
 export {
@@ -24,6 +23,5 @@ export {
   EmptyState,
   AvatarImage,
   Modal,
-  Input,
   Spinner,
 };

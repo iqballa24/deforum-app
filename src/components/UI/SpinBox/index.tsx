@@ -1,33 +1,53 @@
-import React, { useCallback, useState } from 'react';
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
+import React from 'react';
+import { AiOutlineLike, AiOutlineDislike } from 'react-icons/ai';
+import { useAppSelector } from '@/lib/hooks/useRedux';
+import { SpinBoxProps } from '@/lib/types';
 
-const SpinBox = () => {
-  const [counter, setCounter] = useState(0);
+const SpinBox: React.FC<SpinBoxProps> = ({
+  id,
+  upVotesBy,
+  downVotesBy,
+  onUpVoteHandler,
+  onDownVoteHandler,
+}) => {
+  const { user } = useAppSelector((state) => state.auth);
 
-  const onAddCounter = useCallback(() => {
-    setCounter((prev) => prev + 1);
-  }, []);
+  const isUserUpVote = upVotesBy.includes(user.id);
+  const isUserDownVote = downVotesBy.includes(user.id);
 
-  const onSubtractCounter = useCallback(() => {
-    setCounter((prev) => prev - 1);
-  }, []);
+  const onAddCounter = () => {
+    if (!isUserUpVote) {
+      onUpVoteHandler(id);
+    }
+  };
+
+  const onSubtractCounter = () => {
+    if (!isUserDownVote) {
+      onDownVoteHandler(id);
+    }
+  };
 
   return (
-    <React.Fragment>
+    <div className="flex flex-col items-center">
       <button type="button" onClick={onAddCounter} aria-label="Arrow up">
-        <AiOutlineArrowUp
+        <AiOutlineLike
           size={20}
-          className="hover:text-green cursor-pointer"
+          className={`hover:text-green-400 cursor-pointer ${
+            isUserUpVote && 'text-green-400'
+          }`}
         />
       </button>
-      <span className="select-none">{counter}</span>
+      <span className="select-none">{upVotesBy.length}</span>
       <button type="button" onClick={onSubtractCounter} aria-label="Arrow down">
-        <AiOutlineArrowDown
+        <AiOutlineDislike
           size={20}
-          className="hover:text-red cursor-pointer"
+          className={`hover:text-red cursor-pointer ${
+            isUserDownVote && 'text-red'
+          }`}
         />
       </button>
-    </React.Fragment>
+      <span className="select-none">{downVotesBy.length}</span>
+    </div>
   );
 };
 

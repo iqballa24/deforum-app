@@ -1,12 +1,31 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
 import { AiOutlineClose } from 'react-icons/ai';
-import { Input, Button } from '@/components/UI';
+
+import { Button } from '@/components/UI';
 import { dropIn } from '@/constant/transition';
 
+import { useAppDispatch } from '@/lib/hooks/useRedux';
+import { createThreadTypes } from '@/lib/types';
+import { asyncCreateThread } from '@/store/threads/action';
+
 const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const onInputContentBody = () => {
-    console.log('tester');
+  const dispatch = useAppDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<createThreadTypes>();
+
+  const submitHandler = async (data: createThreadTypes) => {
+    try {
+      await dispatch(asyncCreateThread(data));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      onClose();
+    }
   };
 
   return (
@@ -25,22 +44,48 @@ const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         />
       </div>
       <form className="w-full pt-3 pb-8 px-5 space-y-3">
-        <Input placeholder="Title" type="text" />
-        <Input placeholder="category" type="text" />
-        <div
-          id="content-body"
-          contentEditable
-          className="editable w-full min-h-[100px] text-sm md:text-base border-b dark:border-white p-5"
-          onInput={onInputContentBody}
-        ></div>
+        <input
+          id="title"
+          type="text"
+          className="w-full bg-transparent border-b p-2 focus:outline-none focus:border-b-2"
+          placeholder="Title"
+          {...register('title', {
+            required: 'Title field is required',
+          })}
+        />
+        {errors.title && (
+          <p className="text-red-500 text-xs">{errors.title.message}</p>
+        )}
+        <input
+          id="category"
+          type="text"
+          className="w-full bg-transparent border-b p-2 focus:outline-none focus:border-b-2"
+          placeholder="Category"
+          {...register('category', {
+            required: 'Category field is required',
+          })}
+        />
+        {errors.category && (
+          <p className="text-red-500 text-xs">{errors.category.message}</p>
+        )}
+        <textarea
+          id="body"
+          className="w-full min-h-[100px] text-sm md:text-base border bg-transparent dark:border-white p-5"
+          {...register('body', {
+            required: 'Body field is required',
+          })}
+        />
+        {errors.body && (
+          <p className="text-red-500 text-xs">{errors.body.message}</p>
+        )}
         <div className="flex justify-end">
           <Button
             type="submit"
             title="Send"
-            onClick={() => console.log('oke')}
+            onClick={handleSubmit(submitHandler)}
             isPrimary
           >
-            Send
+            {isSubmitting ? 'Loading...' : 'Send'}
           </Button>
         </div>
       </form>

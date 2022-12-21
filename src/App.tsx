@@ -1,8 +1,8 @@
 import React, { Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
+import { asyncPreloaderProcess } from '@/store/isPreload/action';
 
-import { RootState } from '@/lib/types';
 import Layout from './components/Layout';
 import { Spinner } from './components/UI';
 
@@ -11,23 +11,42 @@ const ThreadsPage = React.lazy(() => import('./pages/ThreadsPage'));
 const CommentsPage = React.lazy(() => import('./pages/CommentsPage'));
 const LeaderboardPage = React.lazy(() => import('./pages/LeaderboardPage'));
 const DetailThreadPage = React.lazy(() => import('./pages/DetailThread'));
-const ListComments = React.lazy(() => import('./components/ListComments'));
+const CommentsListPage = React.lazy(() => import('./pages/CommentsListPage'));
+const LoginPage = React.lazy(() => import('./pages/LoginPage'));
+const RegisterPage = React.lazy(() => import('./pages/RegisterPage'));
 
 function App() {
-  const { isDarkMode } = useSelector((state: RootState) => state.ui);
+  const dispatch = useAppDispatch();
+  const { ui, auth } = useAppSelector((state) => state);
 
   useEffect(() => {
-    if (isDarkMode) document.body.classList.add('dark');
+    if (ui.isDarkMode) document.body.classList.add('dark');
     else document.body.classList.remove('dark');
-  }, [isDarkMode]);
+  }, [ui.isDarkMode]);
+
+  useEffect(() => {
+    dispatch(asyncPreloaderProcess());
+  }, [dispatch]);
+
+  if (!auth.isLoggedIn) {
+    return (
+      <Suspense fallback={<Spinner />}>
+        <Routes>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/register" element={<RegisterPage />}></Route>
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </Suspense>
+    );
+  }
 
   return (
     <Layout>
       <Suspense fallback={<Spinner />}>
         <Routes>
           <Route index path="/threads" element={<HomePage />} />
-          <Route path="/threads/:threadId" element={<DetailThreadPage />}>
-            <Route index path="comments" element={<ListComments />} />
+          <Route path="/detail/:threadId" element={<DetailThreadPage />}>
+            <Route index path="comments" element={<CommentsListPage />} />
           </Route>
           <Route path="/my-threads" element={<ThreadsPage />} />
           <Route path="/my-comments" element={<CommentsPage />} />

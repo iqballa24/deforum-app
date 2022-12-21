@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/useRedux';
 import {
   AiOutlineLogout,
   AiOutlineSetting,
@@ -11,13 +11,13 @@ import Settings from '@/components/Settings';
 import FormAddThreads from '@/components/Form/FormAddThread';
 import { Button, Modal } from '@/components/UI';
 import menus from '@/constant/menus';
-import { RootState } from '@/lib/types';
 import { uiActions } from '@/store/ui';
+import { unsetAuthUser } from '@/store/auth/action';
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
-  const { showModalAddThread, showModalSettings, language } = useSelector(
-    (state: RootState) => state.ui
+  const dispatch = useAppDispatch();
+  const { showModalAddThread, showModalSettings, language } = useAppSelector(
+    (state) => state.ui
   );
 
   const toggleModalAddThread = () => {
@@ -26,6 +26,10 @@ const Sidebar = () => {
 
   const toggleModalSettings = () => {
     dispatch(uiActions.toggleModalSettings());
+  };
+
+  const logoutHandler = () => {
+    dispatch(unsetAuthUser());
   };
 
   const classNavLink =
@@ -83,7 +87,7 @@ const Sidebar = () => {
         <li className="h-full flex items-end">
           <Button
             type="button"
-            onClick={() => console.log('new thread')}
+            onClick={logoutHandler}
             isDanger
             isFull
             start

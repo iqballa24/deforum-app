@@ -51,4 +51,18 @@ const spring = {
   damping: 30,
 };
 
-export { pageMotion, cardVariants, spring, dropIn };
+const slideRight = {
+  initial: { opacity: 0, x: -150 },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: { type: 'spring', bounce: 0.4 },
+  },
+  exit: {
+    opacity: 0,
+    x: 0,
+    transition: { type: 'spring', bounce: 0.4 },
+  },
+};
+
+export { pageMotion, cardVariants, spring, dropIn, slideRight };
