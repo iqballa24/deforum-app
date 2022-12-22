@@ -52,7 +52,16 @@ const ThreadPage = () => {
   return (
     <React.Fragment>
       <SearchBar value={searchValue} onSearchHandler={searchHandler} />
-      {threadsList.length === 0 && <EmptyState titleState="thread" />}
+      {threadsList.length === 0 && searchValue.length === 0 && (
+        <EmptyState titleState="thread" />
+      )}
+      {threadsList.length === 0 && searchValue.length > 0 && (
+        <p className="text-center py-10">
+          {ui.language === 'id'
+            ? `Thread dengan judul "${searchValue}" tidak ditemukan`
+            : `Thread with the title "${searchValue}" not found`}
+        </p>
+      )}
       <motion.ul initial="initial" animate="animate" variants={pageMotion}>
         {threadsList.map((thread: threadItemTypes) => (
           <ThreadCard
