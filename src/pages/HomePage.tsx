@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import ThreadCard from '@/components/ThreadCard';
-import { SearchBar } from '@/components/UI';
+import { SearchBar, EmptyState } from '@/components/UI';
 import { pageMotion } from '@/constant/transition';
 
 import { asyncPopulateUsersAndThreads } from '@/store/shared/action';
@@ -51,6 +51,16 @@ const HomePage = () => {
   return (
     <React.Fragment>
       <SearchBar value={searchValue} onSearchHandler={searchHandler} />
+      {threadsList.length === 0 && searchValue.length === 0 && (
+        <EmptyState titleState="thread" />
+      )}
+      {threadsList.length === 0 && searchValue.length > 0 && (
+        <p className="text-center py-10">
+          {ui.language === 'id'
+            ? `Thread dengan judul "${searchValue}" tidak ditemukan`
+            : `Thread with the title "${searchValue}" not found`}
+        </p>
+      )}
       <motion.ul initial="initial" animate="animate" variants={pageMotion}>
         {threadsList.map((thread: threadItemTypes) => (
           <ThreadCard

@@ -1,67 +1,27 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-
-import ThreadCard from '@/components/ThreadCard';
 import { pageMotion } from '@/constant/transition';
-import { SearchBar, EmptyState } from '@/components/UI';
-
-import { asyncPopulateUsersAndThreads } from '@/store/shared/action';
-import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
-import { threadItemTypes, userTypes } from '@/lib/types';
-import { asyncUpVoteThread, asyncDownVoteThread } from '@/store/threads/action';
+import { useAppSelector } from '@/lib/hooks/useRedux';
 
 const CommentsPage = () => {
-  const dispatch = useAppDispatch();
-  const { auth, threads, ui, users } = useAppSelector((state) => state);
-  const [searchValue, setSearchValue] = useState('');
-  const firstRender = useRef<boolean>(true);
-
-  useEffect(() => {
-    if (firstRender.current) {
-      dispatch(asyncPopulateUsersAndThreads());
-      firstRender.current = false;
-    }
-  }, []);
-
-  const upVoteHandler = (id: string) => {
-    dispatch(asyncUpVoteThread(id));
-  };
-
-  const downVoteHandler = (id: string) => {
-    dispatch(asyncDownVoteThread(id));
-  };
-
-  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchValue(value);
-  };
-
-  const threadsList = threads.data
-    .filter((thread: threadItemTypes) => thread.ownerId === auth.user.id)
-    .filter((thread: threadItemTypes) =>
-      thread.category.toLowerCase().includes(ui.queryCategory.toLowerCase())
-    )
-    .filter((thread: threadItemTypes) =>
-      thread.title.toLowerCase().includes(searchValue.toLowerCase())
-    )
-    .map((thread: threadItemTypes) => ({
-      ...thread,
-      owner: users.data.find((user: userTypes) => user.id === thread.ownerId),
-    }));
+  const { ui } = useAppSelector((state) => state);
 
   return (
     <React.Fragment>
-      <SearchBar value={searchValue} onSearchHandler={searchHandler} />
-      {threadsList.length === 0 && <EmptyState titleState={ui.language === 'id' ? 'Komentar' : 'Comments'} />}
       <motion.ul initial="initial" animate="animate" variants={pageMotion}>
-        {threadsList.map((thread: threadItemTypes) => (
-          <ThreadCard
-            key={thread.id}
-            thread={{ ...thread }}
-            onUpVoteHandler={upVoteHandler}
-            onDownVoteHandler={downVoteHandler}
+        <div className="p-5 flex flex-col justify-center items-center mt-5">
+          <h1 className="text-primary font-bold text-base">
+            {ui.language === 'id'
+              ? `Maaf, untuk saat ini halaman sedang dalam perbaikan`
+              : `Sorry, we're currently maintenance for this page`}
+          </h1>
+          <img
+            src="/maintenance.svg"
+            alt="under maintenance"
+            className="w-full max-w-[300px]"
+            loading="lazy"
           />
-        ))}
+        </div>
       </motion.ul>
     </React.Fragment>
   );
