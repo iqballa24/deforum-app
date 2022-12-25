@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { TypographyStylesProvider } from '@mantine/core';
 import { Outlet, Link, useParams } from 'react-router-dom';
 import { AiOutlineComment, AiOutlineArrowLeft } from 'react-icons/ai';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks/useRedux';
@@ -31,10 +32,12 @@ const DetailThread = () => {
       <div className="flex flex-row items-center my-10">
         <div className="w-12/12 flex flex-col space-y-3">
           <h1 className="font-bold text-base cursor-pointer">{data.title}</h1>
-          <div
-            className="font-light pb-8"
-            dangerouslySetInnerHTML={{ __html: data.body }}
-          ></div>
+          <TypographyStylesProvider>
+            <div
+              className="font-light pb-8 text-grey-dark dark:text-white"
+              dangerouslySetInnerHTML={{ __html: data.body }}
+            />
+          </TypographyStylesProvider>
           <div className="flex flex-col sm:flex-row justify-between space-y-2 sm:space-y-0">
             <div className="flex flex-row items-center space-x-2">
               <AvatarImage name={data.owner?.name ?? 'User'} size={24} />

@@ -48,3 +48,15 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+.ql-toolbar {
+  background-color: var(--background-color);
+}
+
+.mantine-RichTextEditor-toolbarControl {
+  color: var(--font-color);
+}
+
+.mantine-RichTextEditor-toolbarControl:hover {
+  @apply text-primary;
+}

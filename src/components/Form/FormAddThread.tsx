@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { AiOutlineClose } from 'react-icons/ai';
+import { RichTextEditor } from '@mantine/rte';
 
 import { Button } from '@/components/UI';
 import { dropIn } from '@/constant/transition';
@@ -16,6 +17,7 @@ const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    control,
   } = useForm<createThreadTypes>();
 
   const submitHandler = async (data: createThreadTypes) => {
@@ -43,7 +45,7 @@ const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           onClick={onClose}
         />
       </div>
-      <form className="w-full pt-3 pb-8 px-5 space-y-3">
+      <form className="w-full pt-3 pb-8 px-5 space-y-5">
         <input
           id="title"
           type="text"
@@ -68,12 +70,24 @@ const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         {errors.category && (
           <p className="text-red-500 text-xs">{errors.category.message}</p>
         )}
-        <textarea
-          id="body"
-          className="w-full min-h-[100px] text-sm md:text-base border bg-transparent dark:border-white p-5"
-          {...register('body', {
-            required: 'Body field is required',
-          })}
+        <Controller
+          control={control}
+          name="body"
+          rules={{ required: 'Body field is required' }}
+          render={({ field: { onChange, value } }) => (
+            <RichTextEditor
+              id="body"
+              value={value}
+              onChange={onChange}
+              className="bg-transparent rounded-md border border-dark-secondary dark:border-white text-dark-secondary dark:text-white overflow-scroll max-h-52 scrollbar-hide"
+              controls={[
+                ['bold', 'italic', 'underline', 'link', 'image'],
+                ['unorderedList', 'h1', 'h2', 'h3'],
+                ['sup', 'sub'],
+                ['alignLeft', 'alignCenter', 'alignRight'],
+              ]}
+            />
+          )}
         />
         {errors.body && (
           <p className="text-red-500 text-xs">{errors.body.message}</p>

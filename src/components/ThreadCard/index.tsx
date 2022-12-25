@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineComment } from 'react-icons/ai';
+import { TypographyStylesProvider } from '@mantine/core';
 import { Label, SpinBox, AvatarImage } from '@/components/UI';
 import { truncateText, formatDistanceDate } from '@/utils';
 import { ThreadCardProps } from '@/lib/types';
@@ -34,10 +35,12 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
         >
           {thread.title}
         </h1>
-        <div
-          className="font-light pb-8 border-b"
-          dangerouslySetInnerHTML={{ __html: body }}
-        ></div>
+        <TypographyStylesProvider>
+          <div
+            className="font-light pb-8 border-b text-grey-dark dark:text-white"
+            dangerouslySetInnerHTML={{ __html: body }}
+          />
+        </TypographyStylesProvider>
         <div className="flex flex-col sm:flex-row justify-between space-y-2 sm:space-y-0">
           <div className="flex flex-row items-center space-x-2">
             <AvatarImage name={thread.owner?.name ?? 'User'} size={24} />
