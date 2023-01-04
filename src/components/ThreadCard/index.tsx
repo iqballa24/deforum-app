@@ -30,6 +30,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
         <Label category={thread.category} />
         <h1
           title={thread.title}
+          tabIndex={0}
           className="font-bold text-base cursor-pointer"
           onClick={() => navigate(`/detail/${thread.id}`)}
         >

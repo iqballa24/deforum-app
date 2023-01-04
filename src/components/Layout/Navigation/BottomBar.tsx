@@ -32,6 +32,8 @@ const BottomBar = () => {
         </li>
       ))}
       <li
+        tabIndex={0}
+        aria-label="add new thread"
         className="absolute right-5 -top-20 rounded-[50%] bg-primary hover:bg-orange-500  p-3 cursor-pointer"
         onClick={toggleModalAddThread}
       >
