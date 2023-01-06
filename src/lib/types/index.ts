@@ -74,7 +74,7 @@ export interface threadTypes {
   body: string;
   category: string;
   createdAt: string;
-  ownerId: string;
+  ownerId?: string;
   upVotesBy: string[];
   downVotesBy: string[];
 }
@@ -101,7 +101,7 @@ export interface commentTypes {
 export interface userTypes {
   id: string;
   name: string;
-  email: string;
+  email?: string;
   avatar: string;
 }
 

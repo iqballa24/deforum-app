@@ -15,13 +15,13 @@ const SpinBox: React.FC<SpinBoxProps> = ({
   const isUserUpVote = upVotesBy.includes(user.id);
   const isUserDownVote = downVotesBy.includes(user.id);
 
-  const onAddCounter = () => {
+  const onUpVoteComment = () => {
     if (!isUserUpVote) {
       onUpVoteHandler(id);
     }
   };
 
-  const onSubtractCounter = () => {
+  const onDownVoteComment = () => {
     if (!isUserDownVote) {
       onDownVoteHandler(id);
     }
@@ -29,7 +29,7 @@ const SpinBox: React.FC<SpinBoxProps> = ({
 
   return (
     <div className="flex flex-col items-center">
-      <button type="button" onClick={onAddCounter} aria-label="like button">
+      <button type="button" onClick={onUpVoteComment} aria-label="like button">
         <AiOutlineLike
           size={20}
           className={`hover:text-green-400 cursor-pointer ${
@@ -38,7 +38,7 @@ const SpinBox: React.FC<SpinBoxProps> = ({
         />
       </button>
       <span className="select-none">{upVotesBy.length}</span>
-      <button type="button" onClick={onSubtractCounter} aria-label="dislike button">
+      <button type="button" onClick={onDownVoteComment} aria-label="dislike button">
         <AiOutlineDislike
           size={20}
           className={`hover:text-red cursor-pointer ${

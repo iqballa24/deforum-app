@@ -20,13 +20,16 @@ const threadDetailSlice = createSlice({
   name: 'thread_Detail',
   initialState: { data: initialState } as SliceState,
   reducers: {
+    resetToInitialState(state) {
+      state.data = initialState;
+    },
     receiveThreadDetail(state, { payload }) {
       state.data = payload;
     },
-    receiveCommentThread(state, { payload }) {
+    addNewCommentThread(state, { payload }) {
       state.data.comments = [payload, ...state.data.comments];
     },
-    toggleUpVoteComment(state, { payload }) {
+    upVoteComment(state, { payload }) {
       const newArr = state.data.comments.map((comment) => {
         if (comment.id === payload.commentId) {
           return {
@@ -41,7 +44,7 @@ const threadDetailSlice = createSlice({
       });
       state.data.comments = newArr;
     },
-    toggleDownVoteComment(state, { payload }) {
+    downVoteComment(state, { payload }) {
       const newArr = state.data.comments.map((comment) => {
         if (comment.id === payload.commentId) {
           return {

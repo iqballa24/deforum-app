@@ -43,16 +43,15 @@ export const asyncUpVoteThread = (threadId: string) => {
     });
 
     dispatch(
-      threadsAction.toggleUpVoteThread({
+      threadsAction.upVoteThread({
         threadId,
         ownerId: auth.user.id,
-        error: false,
       })
     );
 
     if (isUserDownVote) {
-      await dispatch(
-        threadsAction.toggleDownVoteThread({
+      dispatch(
+        threadsAction.downVoteThread({
           threadId,
           ownerId: auth.user.id,
         })
@@ -64,16 +63,15 @@ export const asyncUpVoteThread = (threadId: string) => {
       await API.upVoteThread(threadId);
     } catch (err) {
       dispatch(
-        threadsAction.toggleUpVoteThread({
+        threadsAction.upVoteThread({
           threadId,
           ownerId: auth.user.id,
-          error: true,
         })
       );
 
       if (isUserDownVote) {
         await dispatch(
-          threadsAction.toggleDownVoteThread({
+          threadsAction.downVoteThread({
             threadId,
             ownerId: auth.user.id,
           })
@@ -101,7 +99,7 @@ export const asyncDownVoteThread = (threadId: string) => {
     });
 
     dispatch(
-      threadsAction.toggleDownVoteThread({
+      threadsAction.downVoteThread({
         threadId,
         ownerId: auth.user.id,
         error: false,
@@ -110,7 +108,7 @@ export const asyncDownVoteThread = (threadId: string) => {
 
     if (isUserUpVote) {
       await dispatch(
-        threadsAction.toggleUpVoteThread({
+        threadsAction.upVoteThread({
           threadId,
           ownerId: auth.user.id,
         })
@@ -122,7 +120,7 @@ export const asyncDownVoteThread = (threadId: string) => {
       await API.downVoteThread(threadId);
     } catch (err) {
       dispatch(
-        threadsAction.toggleDownVoteThread({
+        threadsAction.downVoteThread({
           threadId,
           ownerId: auth.user.id,
           error: true,
@@ -131,7 +129,7 @@ export const asyncDownVoteThread = (threadId: string) => {
 
       if (isUserUpVote) {
         await dispatch(
-          threadsAction.toggleUpVoteThread({
+          threadsAction.upVoteThread({
             threadId,
             ownerId: auth.user.id,
           })

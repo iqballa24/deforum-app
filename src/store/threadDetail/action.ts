@@ -31,7 +31,7 @@ export const asyncCreateCommentThread = (content: string) => {
     try {
       dispatch(showLoading());
       const res = await API.createCommentThread(content, threadDetail.data.id);
-      dispatch(threadDetailAction.receiveCommentThread(res));
+      dispatch(threadDetailAction.addNewCommentThread(res));
     } catch (err) {
       if (err instanceof Error) {
         console.log(err.message);
@@ -59,16 +59,15 @@ export const asyncUpVoteComment = (commentId: string) => {
     });
 
     dispatch(
-      threadDetailAction.toggleUpVoteComment({
+      threadDetailAction.upVoteComment({
         commentId,
         ownerId: auth.user.id,
-        error: false,
       })
     );
 
     if (isUserDownVote) {
       await dispatch(
-        threadDetailAction.toggleDownVoteComment({
+        threadDetailAction.downVoteComment({
           commentId,
           ownerId: auth.user.id,
         })
@@ -80,21 +79,20 @@ export const asyncUpVoteComment = (commentId: string) => {
       await API.upVoteComment(threadDetail.data.id, commentId);
     } catch (err) {
       dispatch(
-        threadDetailAction.toggleUpVoteComment({
+        threadDetailAction.upVoteComment({
           commentId,
           ownerId: auth.user.id,
-          error: true,
         })
       );
       if (isUserDownVote) {
         await dispatch(
-          threadDetailAction.toggleDownVoteComment({
+          threadDetailAction.downVoteComment({
             commentId,
             ownerId: auth.user.id,
           })
         );
       }
-      
+
       toast.error('Something went wrong');
       console.log(err);
     } finally {
@@ -116,7 +114,7 @@ export const asyncDownVoteComment = (commentId: string) => {
     });
 
     await dispatch(
-      threadDetailAction.toggleDownVoteComment({
+      threadDetailAction.downVoteComment({
         commentId,
         ownerId: auth.user.id,
       })
@@ -124,7 +122,7 @@ export const asyncDownVoteComment = (commentId: string) => {
 
     if (isUserVoteUp) {
       await dispatch(
-        threadDetailAction.toggleUpVoteComment({
+        threadDetailAction.upVoteComment({
           commentId,
           ownerId: auth.user.id,
         })
@@ -136,14 +134,14 @@ export const asyncDownVoteComment = (commentId: string) => {
       await API.downVoteComment(threadDetail.data.id, commentId);
     } catch (err) {
       await dispatch(
-        threadDetailAction.toggleDownVoteComment({
+        threadDetailAction.downVoteComment({
           commentId,
           ownerId: auth.user.id,
         })
       );
       if (isUserVoteUp) {
         await dispatch(
-          threadDetailAction.toggleUpVoteComment({
+          threadDetailAction.upVoteComment({
             commentId,
             ownerId: auth.user.id,
           })
