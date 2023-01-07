@@ -14,13 +14,12 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <LoadingBar className="absolute bg-primary h-[2px]"/>
       <main className="py-8 h-full">
         <Container>
-          <section
+          <nav
             className="hidden sm:flex flex-col sm:w-2/12 md:w-3/12 h-full max-w-[230px]"
-            role="navigation"
             aria-label="Primary"
           >
             <Sidebar />
-          </section>
+          </nav>
           <section
             className="w-full h-[605px] sm:w-10/12 md:w-6/12 overflow-y-scroll scrollbar-hide z-0 sm:px-5"
             role="main"
