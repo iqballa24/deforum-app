@@ -12,5 +12,6 @@ module.exports = {
     '^@/pages(.*)$': '<rootDir>/src/pages/$1',
     '^@/store(.*)$': '<rootDir>/src/store/$1',
     '^@/lib(.*)$': '<rootDir>/src/lib/$1',
+    '^@/constant(.*)$': '<rootDir>/src/constant/$1',
   },
 };

@@ -21,13 +21,14 @@ const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   } = useForm<createThreadTypes>();
 
   const submitHandler = async (data: createThreadTypes) => {
-    try {
-      await dispatch(asyncCreateThread(data));
-    } catch (err) {
-      console.log(err);
-    } finally {
-      onClose();
-    }
+    console.log(data);
+    // try {
+    //   await dispatch(asyncCreateThread(data));
+    // } catch (err) {
+    //   console.log(err);
+    // } finally {
+    //   onClose();
+    // }
   };
 
   return (
@@ -77,8 +78,10 @@ const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           render={({ field: { onChange, value } }) => (
             <RichTextEditor
               id="body"
+              title="body"
               value={value}
               onChange={onChange}
+              placeholder="Type something here"
               className="bg-transparent rounded-md border border-dark-secondary dark:border-white text-dark-secondary dark:text-white overflow-scroll max-h-52 scrollbar-hide"
               controls={[
                 ['bold', 'italic', 'underline', 'link', 'image'],

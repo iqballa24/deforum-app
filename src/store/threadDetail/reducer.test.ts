@@ -2,7 +2,7 @@
  * test scenario for threadDetailSlice reducer
  *
  * - threadDetailSlice reducer
- *  - should initially set thread detail to initial state
+ *  - should return the initial state when passed an empty action
  *  - should return the thread detail when given receiveThreadDetail action
  *  - should return the thread detail with the new comment when given addNewCommentThread action
  *  - should return the thread detail with the up vote comment when given upVoteComment action
@@ -11,14 +11,14 @@
  */
 
 import store from '@/store';
-import { threadDetailAction } from '@/store/threadDetail';
+import threadDetailSlice, { threadDetailAction } from '@/store/threadDetail';
 
 describe('threadDetailSlice reducer', () => {
   beforeEach(() => {
     store.dispatch(threadDetailAction.resetToInitialState());
   });
 
-  it('should initially set thread detail to initial state', () => {
+  it('should return the initial state when passed an empty action', () => {
     // arrange
     const initialState = {
       id: '',
@@ -32,12 +32,13 @@ describe('threadDetailSlice reducer', () => {
       comments: [],
       owner: { id: '', avatar: '', email: '', name: '' },
     };
+    const action = { type: '' };
 
     // action
-    const state = store.getState().threadDetail;
+    const state = threadDetailSlice.reducer({ data: initialState }, action);
 
     // assert
-    expect(state.data).toEqual(initialState);
+    expect(state).toEqual({ data: initialState });
   });
 
   it('should return the thread detail when given receiveThreadDetail action', () => {
@@ -112,7 +113,7 @@ describe('threadDetailSlice reducer', () => {
     // action
     store.dispatch(threadDetailAction.addNewCommentThread(initialState));
     store.dispatch(threadDetailAction.upVoteComment(payload));
-    
+
     let state = store.getState().threadDetail;
     const isUserDownVote = state.data.comments[0].downVotesBy.includes(
       payload.ownerId
@@ -152,7 +153,7 @@ describe('threadDetailSlice reducer', () => {
     // action
     store.dispatch(threadDetailAction.addNewCommentThread(initialState));
     store.dispatch(threadDetailAction.downVoteComment(payload));
-    
+
     let state = store.getState().threadDetail;
     const isUserUpVote = state.data.comments[0].upVotesBy.includes(
       payload.ownerId

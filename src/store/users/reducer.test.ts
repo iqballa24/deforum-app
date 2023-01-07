@@ -2,24 +2,24 @@
  * test scenario for usersSlice reducer
  *
  * - usersSlice reducer
- *  - should initially set users to initial state
+ *  - should return the initial state when passed an empty action
  *  - should return the users when given receiveUsers action
  *
  */
 import store from '@/store';
-import { userTypes } from '@/lib/types';
-import { usersAction } from '@/store/users';
+import usersSlice, { usersAction } from '@/store/users';
 
 describe('usersSlice reducer', () => {
-  it('Should initially set users to initial state', () => {
+  it('should return the initial state when passed an empty action', () => {
     // arrange
-    const initialState: userTypes[] = [];
+    const initialState = undefined;
+    const action = { type: '' };
 
     // action
-    const state = store.getState().users;
+    const state = usersSlice.reducer(initialState, action);
 
     // assert
-    expect(state.data).toEqual(initialState);
+    expect(state).toEqual({ data: [] });
   });
 
   it('Should return the users when given receiveUsers action', () => {

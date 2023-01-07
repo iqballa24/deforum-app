@@ -2,25 +2,25 @@
  * test sceanrio for leaderboardsSlice reducer
  *
  * - leaderboardSlice reducer
- *  - should initially set leaderboards to initial state
+ *  - should return the initial state when passed an empty action
  *  - should return the leaderboards when given receiveLeaderboards action
  *
  */
 
 import store from '@/store';
-import { leaderboardsAction } from '@/store/leaderboards';
-import { leaderBoardsItem } from '@/lib/types';
+import leaderboardsSlice, { leaderboardsAction } from '@/store/leaderboards';
 
 describe('leaderboardSlice reducer', () => {
-  it('Should initially set leaderboards to initial state', () => {
+  it('should return the initial state when passed an empty action', () => {
     // arrange
-    const initialState: leaderBoardsItem[] = [];
+    const initialState = undefined;
+    const action = { type: '' };
 
     // action
-    const state = store.getState().leaderboards;
+    const state = leaderboardsSlice.reducer(initialState, action);
 
     // assert
-    expect(state.data).toEqual(initialState);
+    expect(state).toEqual({ data: [] });
   });
 
   it('Should return the leaderboards when given receiveLeaderboards action', () => {

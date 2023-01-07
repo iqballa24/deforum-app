@@ -2,7 +2,7 @@
  * test scenario for threadSlice reducer
  *
  * - threadSlice reducer
- *  - should initially set threads to initial state
+ *  - should return the initial state when passed an empty action
  *  - should return the threads when given receiveThreads action
  *  - should return the threads with new thread when given addThreads action
  *  - should return threads with up vote thread when given upVoteThread action
@@ -11,23 +11,23 @@
  */
 
 import store from '@/store';
-import { threadTypes } from '@/lib/types';
-import { threadsAction } from '@/store/threads';
+import threadsSlice, { threadsAction } from '@/store/threads';
 
 describe('threads reducer', () => {
   beforeEach(() => {
     store.dispatch(threadsAction.resetToInitialState());
   });
 
-  it('should initially set threads to initial state', () => {
+  it('should return the initial state when passed an empty action', () => {
     // arrange
-    const initialState: threadTypes[] = [];
+    const initialState = undefined;
+    const action = { type: '' };
 
     // action
-    const state = store.getState().threads;
+    const state = threadsSlice.reducer(initialState, action);
 
     // assert
-    expect(state.data).toEqual(initialState);
+    expect(state).toEqual({ data: [] });
   });
 
   it('should return the threads when given receiveThreads action', () => {

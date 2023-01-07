@@ -2,24 +2,25 @@
  * test scenario for categorySlice reducer
  *
  * - categorySlice reducer function
- *  - should initially set category to initial state
+ *  - should return the initial state when passed an empty action
  *  - should return the category when given receiveListCategory action
  *
  */
 
 import store from '@/store';
-import { categoryActions } from '@/store/category';
+import categorySlice, { categoryActions } from '@/store/category';
 
 describe('categorySlice reducer', () => {
-  it('Should initially set category to initial state', () => {
+  it('should return the initial state when passed an empty action', () => {
     // arrange
-    const initialState: string[] = [];
+    const initialState = undefined;
+    const action = { type: '' };
 
     // action
-    const state = store.getState().category;
+    const state = categorySlice.reducer(initialState, action);
 
     // assert
-    expect(state.data).toEqual(initialState);
+    expect(state).toEqual({ data: [] });
   });
 
   it('Should return the category when given receiveListCategory action', () => {
