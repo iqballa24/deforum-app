@@ -21,14 +21,13 @@ const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   } = useForm<createThreadTypes>();
 
   const submitHandler = async (data: createThreadTypes) => {
-    console.log(data);
-    // try {
-    //   await dispatch(asyncCreateThread(data));
-    // } catch (err) {
-    //   console.log(err);
-    // } finally {
-    //   onClose();
-    // }
+    try {
+      await dispatch(asyncCreateThread(data));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      onClose();
+    }
   };
 
   return (

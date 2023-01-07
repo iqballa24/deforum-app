@@ -16,7 +16,7 @@ export const asyncReceiveLeaderboards = () => {
       } else {
         console.log('Unexpected error', err);
       }
-      toast.error('Something went wrong');
+      toast.error('Ups, something went wrong');
     } finally {
       dispatch(hideLoading());
     }

@@ -23,10 +23,10 @@ export const asyncPopulateUsersAndThreads = () => {
     } catch (err) {
       if (err instanceof Error) {
         console.log(err.message);
+        toast.error(err.message);
       } else {
-        console.log('Unexpected error', err);
+        toast.error('Ups, something went wrong');
       }
-      toast.error('Something went wrong');
     } finally {
       dispatch(hideLoading());
     }

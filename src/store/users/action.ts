@@ -15,8 +15,7 @@ function asyncRegisterUser({ name, email, password }: registerTypes) {
       if (err instanceof Error) {
         toast.error(err.message);
       } else {
-        console.log('Unexpected error', err);
-        toast.error('Something went wrong');
+        toast.error('Ups, something went wrong');
       }
 
       return { error: true };

@@ -10,7 +10,6 @@ const Header = () => {
   const { auth } = useAppSelector((state) => state);
 
   const toggleModalSettings = () => {
-    console.log('tester');
     dispatch(uiActions.toggleModalSettings());
   };
 

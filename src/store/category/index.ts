@@ -4,8 +4,8 @@ const categorySlice = createSlice({
   name: 'category',
   initialState: { data: [] },
   reducers: {
-    receiveListCategory(state, { payload }) {
-      state.data = payload;
+    receiveListCategory(state, action) {
+      state.data = action.payload;
     },
   },
 });

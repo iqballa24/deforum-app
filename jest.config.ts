@@ -5,7 +5,7 @@ module.exports = {
 //   collectCoverage: false,
   moduleNameMapper: {
     '\\.(css|less)$': 'identity-obj-proxy',
-    '^@root(.*)$': '<rootDir>/src$1',
+    '^@root(.*)$': '<rootDir>/src/$1',
     '^@/components(.*)$': '<rootDir>/src/components/$1',
     '^@/hooks(.*)$': '<rootDir>/src/hooks/$1',
     '^@/styles(.*)$': '<rootDir>/src/styles/$1',

@@ -16,8 +16,7 @@ export const asyncReceiveThreadDetail = (threadId: string) => {
         console.log(err.message);
         toast.error(err.message);
       } else {
-        console.log('Unexpected error', err);
-        toast.error('Something went wrong');
+        toast.error('Ups, something went wrong');
       }
     } finally {
       dispatch(hideLoading());
@@ -37,8 +36,7 @@ export const asyncCreateCommentThread = (content: string) => {
         console.log(err.message);
         toast.error(err.message);
       } else {
-        console.log('Unexpected error', err);
-        toast.error('Something went wrong');
+        toast.error('Ups, something went wrong');
       }
     } finally {
       dispatch(hideLoading());
