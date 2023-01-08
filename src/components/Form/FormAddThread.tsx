@@ -50,7 +50,7 @@ const FormAddThreads: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           id="title"
           type="text"
           className="w-full bg-transparent border-b p-2 focus:outline-none focus:border-b-2"
-          placeholder="Titlee"
+          placeholder="Title"
           {...register('title', {
             required: 'Title field is required',
           })}
