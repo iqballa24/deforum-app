@@ -10,7 +10,7 @@ Welcome to Deforum! We're excited to have you here and encourage you to get invo
 - [Overview](#overview)
   - [Feature](#feature)
   - [Screenshot](#screenshot)
-  - [Deploys](#deploys)
+  - [Deploy](#deploy)
 - [My process](#my-process)
   - [Built with](#built-with)
 - [Author](#author)
