@@ -13,17 +13,13 @@ const RegisterPage = () => {
   const dispatch = useAppDispatch();
 
   const submitHandler = async (data: FormRegisterTypes) => {
-    try {
-      const { error } = await dispatch(asyncRegisterUser(data));
-      if (error) return;
+    const { error } = await dispatch(asyncRegisterUser(data));
 
-      setTimeout(() => {
-        navigate('/login');
-      }, 1200);
-    } catch (err) {
-      console.log(err);
-      toast.error('Something went wrong');
-    }
+    if (error) return;
+
+    setTimeout(() => {
+      navigate('/login');
+    }, 1200);
   };
 
   return (
@@ -35,7 +31,7 @@ const RegisterPage = () => {
       className="w-full flex justify-center relative overflow-scroll scrollbar-hide py-10 px-5"
     >
       <section className="flex flex-col w-full max-w-lg space-y-10 ">
-        <div className="flex flex-row items-center justify-center md:space-x-3">
+        <div className="flex flex-row items-center justify-center space-x-3">
           <img
             src="/LOGO.svg"
             alt="logo deforum"
@@ -46,7 +42,7 @@ const RegisterPage = () => {
           </span>
         </div>
         <FormRegister submitHandler={submitHandler} />
-        <div className="space-y-5 text-center">
+        <div className="space-y-5 text-center pb-8">
           <hr />
           <p className="text-gray-400 dark:text-white font-light text-sm">
             Already have an account ?{' '}

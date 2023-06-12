@@ -101,7 +101,7 @@ const FormRegister: React.FC<{
         isPrimary
         onClick={handleSubmit(submitHandler)}
       >
-        {isSubmitting ? 'Loading' : 'Register'}
+        {isSubmitting ? 'Loading...' : 'Register'}
       </Button>
     </form>
   );

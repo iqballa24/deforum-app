@@ -1,5 +1,4 @@
 import React from 'react';
-import { toast } from 'react-hot-toast';
 import { useAppDispatch } from '@/lib/hooks/useRedux';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -12,12 +11,7 @@ const LoginPage = () => {
   const dispatch = useAppDispatch();
 
   const submitHandler = async (data: FormLoginTypes) => {
-    try {
-      await dispatch(setAuthUser(data));
-    } catch (err) {
-      toast.error('Something went wrong');
-      console.log(err);
-    }
+    await dispatch(setAuthUser(data));
   };
 
   return (
@@ -28,7 +22,7 @@ const LoginPage = () => {
       className="w-full h-[100vh] relative"
     >
       <section className="flex flex-col p-5 fixed top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 w-full max-w-lg space-y-10">
-        <div className="flex flex-row items-center justify-center md:space-x-3">
+        <div className="flex flex-row items-center justify-center space-x-3">
           <img
             src="/LOGO.svg"
             alt="logo deforum"
