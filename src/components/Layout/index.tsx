@@ -21,7 +21,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <Sidebar />
           </nav>
           <section
-            className="w-full h-[605px] sm:w-10/12 md:w-6/12 overflow-y-scroll scrollbar-hide z-0 sm:px-5"
+            className="w-full h-[605px] pb-36 sm:pb-0 sm:px-5 sm:w-10/12 md:w-6/12 overflow-y-scroll scrollbar-hide z-0"
             role="main"
           >
             {children}
@@ -31,7 +31,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <TopUsersCard />
           </section>
 
-          {/* SHOWED ONLY ON SMALL DEVICE */}
+          {/* SHOW ONLY ON SMALL DEVICE */}
           <section
             className="fixed bg-white dark:bg-bg-dark w-full left-0 right-0 bottom-0 sm:hidden z-10"
             role="navigation"
@@ -39,7 +39,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           >
             <BottomBar />
           </section>
-          <div className='absolute'></div>
         </Container>
       </main>
     </React.Fragment>
