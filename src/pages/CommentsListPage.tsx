@@ -27,7 +27,7 @@ const CommentsListPage = () => {
       <ul>
         {comments.map((comment: commentTypes) => {
           return (
-            <li key={comment.id} className="flex flex-row items-center my-10">
+            <li key={comment.id} className="flex flex-row items-center my-10 border py-4">
               <div className="w-2/12">
                 <SpinBox
                   id={comment.id}

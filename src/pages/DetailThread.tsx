@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TypographyStylesProvider } from '@mantine/core';
 import { Outlet, Link, useParams } from 'react-router-dom';
 import { AiOutlineComment, AiOutlineArrowLeft } from 'react-icons/ai';
@@ -11,6 +11,7 @@ const DetailThread = () => {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.threadDetail);
   const { threadId } = useParams();
+  const [isCommentClicked, setIsCommentClicked] = useState(false);
 
   useEffect(() => {
     if (threadId) dispatch(asyncReceiveThreadDetail(threadId));
@@ -29,8 +30,8 @@ const DetailThread = () => {
         <AiOutlineArrowLeft size={20} />
         <span className="transition-all">Back</span>
       </Link>
-      <div className="flex flex-row items-center my-10">
-        <div className="w-12/12 flex flex-col space-y-3">
+      <div className="my-10">
+        <div className="flex flex-col space-y-3">
           <h1 className="font-bold text-base cursor-pointer">{data.title}</h1>
           <TypographyStylesProvider>
             <div
@@ -55,12 +56,17 @@ const DetailThread = () => {
           </div>
         </div>
       </div>
-      <div className="my-5 text-center">
-        <hr className="mb-5" />
-        <Link to="comments" className="underline">
-          Load comments
-        </Link>
-      </div>
+      {!isCommentClicked && (
+        <div
+          className="my-5 text-center"
+          onClick={() => setIsCommentClicked(true)}
+        >
+          <hr className="mb-5" />
+          <Link to="comments" className="underline">
+            Load comments
+          </Link>
+        </div>
+      )}
       <Outlet context={data.comments} />
     </React.Fragment>
   );

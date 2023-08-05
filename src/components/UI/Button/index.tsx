@@ -22,7 +22,7 @@ const Button: React.FC<ButtonsProps> = ({
   isFull && className.push('w-full');
   start && className.push('md:justify-start');
   end && className.push('md:justify-end');
-  disabled && className.push('opacity-75');
+  disabled && className.push('opacity-75 hover:bg-primary');
 
   return (
     <button
